@@ -1,0 +1,1302 @@
+{
+  "phase": "after",
+  "generatedAt": "2026-10-05T13:36:46.673Z",
+  "node": "v22.16.0",
+  "layer": "API + SQLite; Supertest; интерфейс браузера этим запуском не проверяется",
+  "total": 28,
+  "passed": 28,
+  "failed": 0,
+  "results": [
+    {
+      "id": "P01",
+      "title": "Заказ с электронным кошельком",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P02",
+      "title": "Заказ с корректной картой",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P03",
+      "title": "Промокод SALE10",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 22410,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P04",
+      "title": "Промокод WELCOME15",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 21165,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P05",
+      "title": "Промокод в нижнем регистре",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 22410,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P06",
+      "title": "Номер карты с пробелами",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P07",
+      "title": "Заказ двух единиц товара",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 49800,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 2
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 12
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P08",
+      "title": "Заказ двух разных товаров",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 63400,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          },
+          {
+            "product_id": "p002",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 2
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P09",
+      "title": "Удаление пробелов по краям адреса",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "P10",
+      "title": "CVV из трёх цифр с ведущими нулями",
+      "type": "Positive",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N01",
+      "title": "Оформление без авторизации",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 401,
+      "error": "Требуется авторизация.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N02",
+      "title": "Оформление с пустой корзиной",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Корзина пуста.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N03",
+      "title": "Адрес только из пробелов",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Укажите адрес доставки.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N04",
+      "title": "Пустой телефон",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Укажите номер телефона.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N05",
+      "title": "Несуществующий промокод",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Промокод недействителен.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N06",
+      "title": "Номер карты из 15 цифр",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Номер карты должен содержать 16 цифр.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N07",
+      "title": "Нарушение контрольной суммы карты",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Некорректный номер карты.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N08",
+      "title": "Тестовый отказ оплаты",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 402,
+      "error": "Платёж отклонён банком-эмитентом. Проверьте данные карты или выберите другой способ оплаты.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "N09",
+      "title": "Неизвестный способ оплаты",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Некорректный способ оплаты.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": "D5-01"
+    },
+    {
+      "id": "N10",
+      "title": "Месяц карты 13",
+      "type": "Negative",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Срок действия карты некорректен или истёк.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": "D5-02"
+    },
+    {
+      "id": "B01",
+      "title": "Номер карты из 17 цифр",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Номер карты должен содержать 16 цифр.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B02",
+      "title": "CVV из двух цифр",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "CVV должен содержать 3 цифры.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B03",
+      "title": "CVV ровно из трёх цифр",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B04",
+      "title": "CVV из четырёх цифр",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "CVV должен содержать 3 цифры.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B05",
+      "title": "Месяц карты 00",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Срок действия карты некорректен или истёк.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": "D5-02"
+    },
+    {
+      "id": "B06",
+      "title": "Минимальный месяц 01",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B07",
+      "title": "Максимальный месяц 12",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 200,
+      "error": null,
+      "orderStatus": "processing",
+      "total": 24900,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 1,
+        "cart": [],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 13
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": null
+    },
+    {
+      "id": "B08",
+      "title": "Истёкший срок карты",
+      "type": "Boundary",
+      "status": "Passed",
+      "actualHttp": 400,
+      "error": "Срок действия карты некорректен или истёк.",
+      "orderStatus": null,
+      "total": null,
+      "before": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "after": {
+        "orders": 0,
+        "cart": [
+          {
+            "product_id": "p001",
+            "qty": 1
+          }
+        ],
+        "stock": [
+          {
+            "id": "p001",
+            "stock": 14
+          },
+          {
+            "id": "p002",
+            "stock": 3
+          }
+        ]
+      },
+      "defect": "D5-02"
+    }
+  ]
+}

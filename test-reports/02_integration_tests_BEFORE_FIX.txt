@@ -1,0 +1,58 @@
+  console.log
+    [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+  console.log
+    [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+  console.log
+    [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+FAIL tests/integration/api.test.js
+  IT-01: Регистрация ↔ таблица users ↔ сессия
+    ✓ после регистрации GET /api/me возвращает нового пользователя (132 ms)
+    ✓ повторная регистрация с тем же email → ошибка 400 (компонент валидации ↔ БД) (96 ms)
+  IT-02: Логин ↔ bcrypt ↔ users
+    ✓ верные учётные данные seed-пользователя → успешный вход (91 ms)
+    ✓ неверный пароль → 400 и понятная ошибка (94 ms)
+  IT-03: Корзина ↔ таблица products ↔ таблица carts
+    ✓ добавление товара в корзину отражается в GET /api/cart (99 ms)
+    ✓ количество не может превысить остаток на складе (p002 stock=3) (98 ms)
+    ✓ нельзя добавить товар с нулевым остатком (p003 stock=0) (94 ms)
+  IT-04: Оформление заказа ↔ cart ↔ products ↔ orders (несколько таблиц сразу)
+    ✓ заказ создаётся, остаток товара уменьшается, корзина очищается (108 ms)
+    ✓ оплата тестовой картой-отказом 4000000000000002 → заказ НЕ создаётся (96 ms)
+  IT-05: Права доступа ↔ сессия ↔ admin-маршруты
+    ✓ обычный пользователь не может зайти в /api/admin/overview (403) (103 ms)
+    ✓ администратор получает доступ к /api/admin/overview (200) (95 ms)
+    ✓ неавторизованный запрос к /api/cart → 401 (3 ms)
+  IT-06 (обнаружение дефекта D-01): повторная отмена заказа
+    ✕ повторный вызов /cancel на уже отменённом заказе не должен повторно пополнять склад (114 ms)
+
+  ● IT-06 (обнаружение дефекта D-01): повторная отмена заказа › повторный вызов /cancel на уже отменённом заказе не должен повторно пополнять склад
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 22
+    Received: 23
+
+      170 |     await agent.post('/api/orders/' + orderId + '/cancel');
+      171 |     const afterSecondCancel = await agent.get('/api/products/p006');
+    > 172 |     expect(afterSecondCancel.body.product.stock).toBe(stockBefore); // ожидание: осталось столько же
+          |                                                  ^
+      173 |   });
+      174 | });
+      175 |
+
+      at Object.toBe (tests/integration/api.test.js:172:50)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 12 passed, 13 total
+Snapshots:   0 total
+Time:        2.442 s
+Ran all test suites matching /tests\/integration/i.

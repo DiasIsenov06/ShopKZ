@@ -1,0 +1,46 @@
+{
+  "name": "shopkz",
+  "version": "1.0.0",
+  "description": "Учебный интернет-магазин ShopKZ (Node.js + Express + SQLite) — объект тестирования для практических работ по QA",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest --runInBand",
+    "test:unit": "jest tests/unit --runInBand",
+    "test:integration": "jest tests/integration --runInBand",
+    "test:acceptance": "jest tests/acceptance --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
+    "test:system": "node tests/system/system.test.js",
+    "test:e2e": "playwright test tests/e2e",
+    "practical5": "node practical5/run.js after",
+    "practical5:before": "node practical5/run.js before"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^18.0.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/e2e/",
+      "/tests/system/"
+    ],
+    "collectCoverageFrom": [
+      "utils.js",
+      "server.js"
+    ],
+    "coverageDirectory": "coverage"
+  }
+}

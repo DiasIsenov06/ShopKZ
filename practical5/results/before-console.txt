@@ -1,0 +1,143 @@
+
+> shopkz@1.0.0 practical5:before
+> node practical5/run.js before
+
+  console.error
+    ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.<anonymous> (practical5/server.before.cjs:4:19)
+      at Object.require (tests/practical5/checkout.test.js:16:7)
+
+  console.log
+    [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+  console.log
+    [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+  console.log
+    [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+FAIL tests/practical5/checkout.test.js
+  ✓ P01 Positive — Заказ с электронным кошельком (130 ms)
+  ✓ P02 Positive — Заказ с корректной картой (88 ms)
+  ✓ P03 Positive — Промокод SALE10 (86 ms)
+  ✓ P04 Positive — Промокод WELCOME15 (85 ms)
+  ✓ P05 Positive — Промокод в нижнем регистре (89 ms)
+  ✓ P06 Positive — Номер карты с пробелами (84 ms)
+  ✓ P07 Positive — Заказ двух единиц товара (119 ms)
+  ✓ P08 Positive — Заказ двух разных товаров (85 ms)
+  ✓ P09 Positive — Удаление пробелов по краям адреса (84 ms)
+  ✓ P10 Positive — CVV из трёх цифр с ведущими нулями (83 ms)
+  ✓ N01 Negative — Оформление без авторизации (3 ms)
+  ✓ N02 Negative — Оформление с пустой корзиной (78 ms)
+  ✓ N03 Negative — Адрес только из пробелов (77 ms)
+  ✓ N04 Negative — Пустой телефон (76 ms)
+  ✓ N05 Negative — Несуществующий промокод (76 ms)
+  ✓ N06 Negative — Номер карты из 15 цифр (78 ms)
+  ✓ N07 Negative — Нарушение контрольной суммы карты (78 ms)
+  ✓ N08 Negative — Тестовый отказ оплаты (80 ms)
+  ✕ N09 Negative — Неизвестный способ оплаты (81 ms)
+  ✕ N10 Negative — Месяц карты 13 (79 ms)
+  ✓ B01 Boundary — Номер карты из 17 цифр (79 ms)
+  ✓ B02 Boundary — CVV из двух цифр (77 ms)
+  ✓ B03 Boundary — CVV ровно из трёх цифр (79 ms)
+  ✓ B04 Boundary — CVV из четырёх цифр (77 ms)
+  ✕ B05 Boundary — Месяц карты 00 (77 ms)
+  ✓ B06 Boundary — Минимальный месяц 01 (79 ms)
+  ✓ B07 Boundary — Максимальный месяц 12 (83 ms)
+  ✕ B08 Boundary — Истёкший срок карты (78 ms)
+
+  ● N09 Negative — Неизвестный способ оплаты
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 200
+
+      63 |   results.push(record);
+      64 |   try {
+    > 65 |     expect(res.status).toBe(c.expectedStatus);
+         |                        ^
+      66 |     if (c.expectedStatus === 200) {
+      67 |       expect(res.body.order.status).toBe('processing');
+      68 |       expect(res.body.order.total).toBe(c.expectedTotal);
+
+      at toBe (tests/practical5/checkout.test.js:65:24)
+
+  ● N10 Negative — Месяц карты 13
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 200
+
+      63 |   results.push(record);
+      64 |   try {
+    > 65 |     expect(res.status).toBe(c.expectedStatus);
+         |                        ^
+      66 |     if (c.expectedStatus === 200) {
+      67 |       expect(res.body.order.status).toBe('processing');
+      68 |       expect(res.body.order.total).toBe(c.expectedTotal);
+
+      at toBe (tests/practical5/checkout.test.js:65:24)
+
+  ● B05 Boundary — Месяц карты 00
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 200
+
+      63 |   results.push(record);
+      64 |   try {
+    > 65 |     expect(res.status).toBe(c.expectedStatus);
+         |                        ^
+      66 |     if (c.expectedStatus === 200) {
+      67 |       expect(res.body.order.status).toBe('processing');
+      68 |       expect(res.body.order.total).toBe(c.expectedTotal);
+
+      at toBe (tests/practical5/checkout.test.js:65:24)
+
+  ● B08 Boundary — Истёкший срок карты
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 200
+
+      63 |   results.push(record);
+      64 |   try {
+    > 65 |     expect(res.status).toBe(c.expectedStatus);
+         |                        ^
+      66 |     if (c.expectedStatus === 200) {
+      67 |       expect(res.body.order.status).toBe('processing');
+      68 |       expect(res.body.order.total).toBe(c.expectedTotal);
+
+      at toBe (tests/practical5/checkout.test.js:65:24)
+
+Test Suites: 1 failed, 1 total
+Tests:       4 failed, 24 passed, 28 total
+Snapshots:   0 total
+Time:        2.904 s, estimated 3 s
+Ran all test suites matching /tests\/practical5\/checkout.test.js/i.
+Test results written to: practical5/results/before-jest.json
+
+Результаты: practical5/results/before-results.json
+В исходной версии ожидаются Failed — это воспроизведение найденных дефектов.

@@ -1,0 +1,201 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><title>ShopKZ Практическая 5</title><style>body{font:16px/1.5 Arial,sans-serif;max-width:1100px;margin:40px auto;padding:0 24px;color:#182335}h1,h2,h3{color:#111}table{width:100%;border-collapse:collapse;margin:20px 0}th,td{border:1px solid #ccd4df;padding:10px;text-align:left}th{background:#eef3f9}article{border-top:1px solid #aaa;padding:16px 0;break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;padding:14px}dt{font-weight:bold;margin-top:10px}dd{margin:0}button{padding:10px 16px;cursor:pointer}@media print{button{display:none}body{margin:0;font-size:11pt}}</style><h1>Практическая работа №5 — ShopKZ</h1><p>Исенов Диас АЖ-47. Проверено 05.10.2026. 5 сценариев, 10 Positive, 10 Negative, 8 Boundary.</p><button onclick="window.print()">Печать</button><p>Исходная версия: 24 Passed, 4 Failed. После исправления: 28 Passed. Общий запуск: 69 Passed. Это сохранённый прогон; новые результаты смотрите в practical5/results.</p><h2>Требования</h2><table><thead><tr><th>ID</th><th>Правило</th></tr></thead><tbody><tr><td>R01</td><td>Оформлять заказ может только авторизованный пользователь.</td></tr><tr><td>R02</td><td>Для оформления корзина должна содержать товары.</td></tr><tr><td>R03</td><td>Адрес и телефон обязательны; адрес сохраняется без пробелов по краям.</td></tr><tr><td>R04</td><td>Разрешены только способы оплаты card и ewallet.</td></tr><tr><td>R05</td><td>Карта содержит 16 цифр и проходит проверку Луна; тестовая карта отказа отклоняется.</td></tr><tr><td>R06</td><td>CVV содержит 3 цифры. Срок имеет формат ММ/ГГ, месяц 1–12, карта не просрочена.</td></tr><tr><td>R07</td><td>Применяется только действующий промокод; регистр букв не влияет на результат.</td></tr><tr><td>R08</td><td>Сумма равна стоимости позиций с учётом скидки и округления до целых тенге.</td></tr><tr><td>R09</td><td>Успех создаёт processing, очищает корзину и уменьшает остаток. Отказ не изменяет данные.</td></tr></tbody></table><h2>Сценарии</h2><table><thead><tr><th>ID</th><th>Описание</th><th>Кейсы</th></tr></thead><tbody><tr><td>TS-01</td><td>Доступ к оформлению и наличие корзины</td><td>P01, N01, N02</td></tr><tr><td>TS-02</td><td>Применение промокода и расчёт скидки</td><td>P03–P05, N05</td></tr><tr><td>TS-03</td><td>Выбор оплаты и проверка карты</td><td>P02, P06, P10, N06–N10, B01–B08</td></tr><tr><td>TS-04</td><td>Состав заказа и изменение остатков</td><td>P07, P08</td></tr><tr><td>TS-05</td><td>Обязательные данные доставки</td><td>P09, N03, N04</td></tr></tbody></table><h2>Матрица требований</h2><table><thead><tr><th>Требование</th><th>Кейсы</th><th>Результат</th></tr></thead><tbody><tr><td>R01</td><td>P01, N01</td><td>Passed</td></tr><tr><td>R02</td><td>P01, N02</td><td>Passed</td></tr><tr><td>R03</td><td>P09, N03, N04</td><td>Passed</td></tr><tr><td>R04</td><td>P02, N09</td><td>Passed</td></tr><tr><td>R05</td><td>P02, P06, N06, N07, N08, B01</td><td>Passed</td></tr><tr><td>R06</td><td>P02, P06, P10, N10, B02, B03, B04, B05, B06, B07, B08</td><td>Passed</td></tr><tr><td>R07</td><td>P03, P04, P05, N05</td><td>Passed</td></tr><tr><td>R08</td><td>P01, P02, P03, P04, P05, P07, P08</td><td>Passed</td></tr><tr><td>R09</td><td>P01, P02, P07, P08, N08, N09, N10, B05, B08</td><td>Passed</td></tr></tbody></table><h2>Тест-кейсы</h2><article><h3>P01 Заказ с электронным кошельком</h3><p>Positive | TS-01 | R01, R02, R08, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P02 Заказ с корректной картой</h3><p>Positive | TS-03 | R04, R05, R06, R08, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P03 Промокод SALE10</h3><p>Positive | TS-02 | R07, R08 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;,
+  &quot;promoCode&quot;: &quot;SALE10&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P04 Промокод WELCOME15</h3><p>Positive | TS-02 | R07, R08 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;,
+  &quot;promoCode&quot;: &quot;WELCOME15&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 21165 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 21165 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 21165 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P05 Промокод в нижнем регистре</h3><p>Positive | TS-02 | R07, R08 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;,
+  &quot;promoCode&quot;: &quot;sale10&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 22410 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P06 Номер карты с пробелами</h3><p>Positive | TS-03 | R05, R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532 0151 1283 0366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P07 Заказ двух единиц товара</h3><p>Positive | TS-04 | R08, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 2. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 49800 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 49800 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 49800 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P08 Заказ двух разных товаров</h3><p>Positive | TS-04 | R08, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1, p002 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 63400 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 63400 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 63400 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P09 Удаление пробелов по краям адреса</h3><p>Positive | TS-05 | R03 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;  г. Астана, ул. Абая 10  &quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>P10 CVV из трёх цифр с ведущими нулями</h3><p>Positive | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;000&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N01 Оформление без авторизации</h3><p>Negative | TS-01 | R01 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь не вошёл в аккаунт. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 401; сообщение «Требуется авторизация.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 401; Требуется авторизация. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 401; Требуется авторизация. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N02 Оформление с пустой корзиной</h3><p>Negative | TS-01 | R02 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина пуста. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Корзина пуста.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Корзина пуста. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Корзина пуста. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N03 Адрес только из пробелов</h3><p>Negative | TS-05 | R03 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;   &quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Укажите адрес доставки.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Укажите адрес доставки. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Укажите адрес доставки. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N04 Пустой телефон</h3><p>Negative | TS-05 | R03 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Укажите номер телефона.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Укажите номер телефона. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Укажите номер телефона. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N05 Несуществующий промокод</h3><p>Negative | TS-02 | R07 | Priority Medium | Severity Medium</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;ewallet&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;,
+  &quot;promoCode&quot;: &quot;BADCODE&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Промокод недействителен.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Промокод недействителен. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Промокод недействителен. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N06 Номер карты из 15 цифр</h3><p>Negative | TS-03 | R05 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;453201511283036&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Номер карты должен содержать 16 цифр.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Номер карты должен содержать 16 цифр. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Номер карты должен содержать 16 цифр. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N07 Нарушение контрольной суммы карты</h3><p>Negative | TS-03 | R05 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830367&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Некорректный номер карты.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Некорректный номер карты. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Некорректный номер карты. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N08 Тестовый отказ оплаты</h3><p>Negative | TS-03 | R05, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4000000000000002&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 402; сообщение «Платёж отклонён банком-эмитентом.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 402; Платёж отклонён банком-эмитентом. Проверьте данные карты или выберите другой способ оплаты. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 402; Платёж отклонён банком-эмитентом. Проверьте данные карты или выберите другой способ оплаты. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>N09 Неизвестный способ оплаты</h3><p>Negative | TS-03 | R04, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;crypto&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Некорректный способ оплаты.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Некорректный способ оплаты. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Failed → Passed</dd></dl></article><article><h3>N10 Месяц карты 13</h3><p>Negative | TS-03 | R06, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;13/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Срок действия карты некорректен или истёк. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Failed → Passed</dd></dl></article><article><h3>B01 Номер карты из 17 цифр</h3><p>Boundary | TS-03 | R05 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;45320151128303660&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Номер карты должен содержать 16 цифр.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; Номер карты должен содержать 16 цифр. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Номер карты должен содержать 16 цифр. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B02 CVV из двух цифр</h3><p>Boundary | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;12&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «CVV должен содержать 3 цифры.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; CVV должен содержать 3 цифры. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; CVV должен содержать 3 цифры. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B03 CVV ровно из трёх цифр</h3><p>Boundary | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B04 CVV из четырёх цифр</h3><p>Boundary | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;1234&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «CVV должен содержать 3 цифры.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 400; CVV должен содержать 3 цифры. Заказ не создан; корзина и остатки сохранены.</dd><dt>Actual Result после</dt><dd>HTTP 400; CVV должен содержать 3 цифры. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B05 Месяц карты 00</h3><p>Boundary | TS-03 | R06, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;00/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Срок действия карты некорректен или истёк. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Failed → Passed</dd></dl></article><article><h3>B06 Минимальный месяц 01</h3><p>Boundary | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;01/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B07 Максимальный месяц 12</h3><p>Boundary | TS-03 | R06 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;12/99&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Status</dt><dd>Passed → Passed</dd></dl></article><article><h3>B08 Истёкший срок карты</h3><p>Boundary | TS-03 | R06, R09 | Priority High | Severity High</p><dl><dt>Preconditions</dt><dd>Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.</dd><dt>Test Data</dt><dd><pre>{
+  &quot;address&quot;: &quot;г. Астана, ул. Абая 10&quot;,
+  &quot;phone&quot;: &quot;+7 700 123 45 67&quot;,
+  &quot;payment&quot;: &quot;card&quot;,
+  &quot;cardNumber&quot;: &quot;4532015112830366&quot;,
+  &quot;cardExpiry&quot;: &quot;01/00&quot;,
+  &quot;cardCvv&quot;: &quot;123&quot;
+}</pre></dd><dt>Test Steps</dt><dd><ol><li>Подготовить указанный аккаунт и корзину.</li><li>Отправить POST /api/orders с данными Test Data.</li><li>Проверить HTTP-код и JSON ответа.</li><li>Проверить список заказов, корзину и остатки товаров.</li></ol></dd><dt>Expected Result</dt><dd>HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены.</dd><dt>Actual Result до</dt><dd>HTTP 200; заказ processing; total = 24900 ₸; заказов 1; корзина очищена; остатки уменьшены.</dd><dt>Actual Result после</dt><dd>HTTP 400; Срок действия карты некорректен или истёк. Заказ не создан; корзина и остатки сохранены.</dd><dt>Status</dt><dd>Failed → Passed</dd></dl></article></html>

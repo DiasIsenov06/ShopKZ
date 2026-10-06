@@ -1,0 +1,1127 @@
+[
+  {
+    "id": "P01",
+    "type": "Positive",
+    "scenario": "TS-01",
+    "requirements": [
+      "R01",
+      "R02",
+      "R08",
+      "R09"
+    ],
+    "title": "Заказ с электронным кошельком",
+    "override": {},
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P02",
+    "type": "Positive",
+    "scenario": "TS-03",
+    "requirements": [
+      "R04",
+      "R05",
+      "R06",
+      "R08",
+      "R09"
+    ],
+    "title": "Заказ с корректной картой",
+    "override": {
+      "payment": "card"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P03",
+    "type": "Positive",
+    "scenario": "TS-02",
+    "requirements": [
+      "R07",
+      "R08"
+    ],
+    "title": "Промокод SALE10",
+    "override": {
+      "promoCode": "SALE10"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "Medium",
+    "severity": "Medium",
+    "discount": 10,
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123",
+      "promoCode": "SALE10"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 22410,
+    "expectedResult": "HTTP 200; заказ processing; total = 22410 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P04",
+    "type": "Positive",
+    "scenario": "TS-02",
+    "requirements": [
+      "R07",
+      "R08"
+    ],
+    "title": "Промокод WELCOME15",
+    "override": {
+      "promoCode": "WELCOME15"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "Medium",
+    "severity": "Medium",
+    "discount": 15,
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123",
+      "promoCode": "WELCOME15"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 21165,
+    "expectedResult": "HTTP 200; заказ processing; total = 21165 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P05",
+    "type": "Positive",
+    "scenario": "TS-02",
+    "requirements": [
+      "R07",
+      "R08"
+    ],
+    "title": "Промокод в нижнем регистре",
+    "override": {
+      "promoCode": "sale10"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "Medium",
+    "severity": "Medium",
+    "discount": 10,
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123",
+      "promoCode": "sale10"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 22410,
+    "expectedResult": "HTTP 200; заказ processing; total = 22410 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P06",
+    "type": "Positive",
+    "scenario": "TS-03",
+    "requirements": [
+      "R05",
+      "R06"
+    ],
+    "title": "Номер карты с пробелами",
+    "override": {
+      "payment": "card",
+      "cardNumber": "4532 0151 1283 0366"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532 0151 1283 0366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P07",
+    "type": "Positive",
+    "scenario": "TS-04",
+    "requirements": [
+      "R08",
+      "R09"
+    ],
+    "title": "Заказ двух единиц товара",
+    "override": {},
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        2
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 2. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 49800,
+    "expectedResult": "HTTP 200; заказ processing; total = 49800 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P08",
+    "type": "Positive",
+    "scenario": "TS-04",
+    "requirements": [
+      "R08",
+      "R09"
+    ],
+    "title": "Заказ двух разных товаров",
+    "override": {},
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ],
+      [
+        "p002",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1, p002 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 63400,
+    "expectedResult": "HTTP 200; заказ processing; total = 63400 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P09",
+    "type": "Positive",
+    "scenario": "TS-05",
+    "requirements": [
+      "R03"
+    ],
+    "title": "Удаление пробелов по краям адреса",
+    "override": {
+      "address": "  г. Астана, ул. Абая 10  "
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "Medium",
+    "severity": "Medium",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "  г. Астана, ул. Абая 10  ",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "P10",
+    "type": "Positive",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "CVV из трёх цифр с ведущими нулями",
+    "override": {
+      "payment": "card",
+      "cardCvv": "000"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "000"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "N01",
+    "type": "Negative",
+    "scenario": "TS-01",
+    "requirements": [
+      "R01"
+    ],
+    "title": "Оформление без авторизации",
+    "override": {},
+    "expectedStatus": 401,
+    "expectedError": "Требуется авторизация.",
+    "priority": "High",
+    "severity": "High",
+    "anonymous": true,
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь не вошёл в аккаунт. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 401; сообщение «Требуется авторизация.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N02",
+    "type": "Negative",
+    "scenario": "TS-01",
+    "requirements": [
+      "R02"
+    ],
+    "title": "Оформление с пустой корзиной",
+    "override": {},
+    "expectedStatus": 400,
+    "expectedError": "Корзина пуста.",
+    "priority": "High",
+    "severity": "High",
+    "items": [],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина пуста. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 0,
+    "expectedResult": "HTTP 400; сообщение «Корзина пуста.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N03",
+    "type": "Negative",
+    "scenario": "TS-05",
+    "requirements": [
+      "R03"
+    ],
+    "title": "Адрес только из пробелов",
+    "override": {
+      "address": "   "
+    },
+    "expectedStatus": 400,
+    "expectedError": "Укажите адрес доставки.",
+    "priority": "Medium",
+    "severity": "Medium",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "   ",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Укажите адрес доставки.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N04",
+    "type": "Negative",
+    "scenario": "TS-05",
+    "requirements": [
+      "R03"
+    ],
+    "title": "Пустой телефон",
+    "override": {
+      "phone": ""
+    },
+    "expectedStatus": 400,
+    "expectedError": "Укажите номер телефона.",
+    "priority": "Medium",
+    "severity": "Medium",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Укажите номер телефона.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N05",
+    "type": "Negative",
+    "scenario": "TS-02",
+    "requirements": [
+      "R07"
+    ],
+    "title": "Несуществующий промокод",
+    "override": {
+      "promoCode": "BADCODE"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Промокод недействителен.",
+    "priority": "Medium",
+    "severity": "Medium",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "ewallet",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123",
+      "promoCode": "BADCODE"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Промокод недействителен.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N06",
+    "type": "Negative",
+    "scenario": "TS-03",
+    "requirements": [
+      "R05"
+    ],
+    "title": "Номер карты из 15 цифр",
+    "override": {
+      "payment": "card",
+      "cardNumber": "453201511283036"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Номер карты должен содержать 16 цифр.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "453201511283036",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Номер карты должен содержать 16 цифр.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N07",
+    "type": "Negative",
+    "scenario": "TS-03",
+    "requirements": [
+      "R05"
+    ],
+    "title": "Нарушение контрольной суммы карты",
+    "override": {
+      "payment": "card",
+      "cardNumber": "4532015112830367"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Некорректный номер карты.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830367",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Некорректный номер карты.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N08",
+    "type": "Negative",
+    "scenario": "TS-03",
+    "requirements": [
+      "R05",
+      "R09"
+    ],
+    "title": "Тестовый отказ оплаты",
+    "override": {
+      "payment": "card",
+      "cardNumber": "4000000000000002"
+    },
+    "expectedStatus": 402,
+    "expectedError": "Платёж отклонён банком-эмитентом.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4000000000000002",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 402; сообщение «Платёж отклонён банком-эмитентом.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N09",
+    "type": "Negative",
+    "scenario": "TS-03",
+    "requirements": [
+      "R04",
+      "R09"
+    ],
+    "title": "Неизвестный способ оплаты",
+    "override": {
+      "payment": "crypto"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Некорректный способ оплаты.",
+    "priority": "High",
+    "severity": "High",
+    "defect": "D5-01",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "crypto",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Некорректный способ оплаты.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "N10",
+    "type": "Negative",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06",
+      "R09"
+    ],
+    "title": "Месяц карты 13",
+    "override": {
+      "payment": "card",
+      "cardExpiry": "13/99"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Срок действия карты некорректен или истёк.",
+    "priority": "High",
+    "severity": "High",
+    "defect": "D5-02",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "13/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "B01",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R05"
+    ],
+    "title": "Номер карты из 17 цифр",
+    "override": {
+      "payment": "card",
+      "cardNumber": "45320151128303660"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Номер карты должен содержать 16 цифр.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "45320151128303660",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Номер карты должен содержать 16 цифр.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "B02",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "CVV из двух цифр",
+    "override": {
+      "payment": "card",
+      "cardCvv": "12"
+    },
+    "expectedStatus": 400,
+    "expectedError": "CVV должен содержать 3 цифры.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "12"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «CVV должен содержать 3 цифры.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "B03",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "CVV ровно из трёх цифр",
+    "override": {
+      "payment": "card",
+      "cardCvv": "123"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "B04",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "CVV из четырёх цифр",
+    "override": {
+      "payment": "card",
+      "cardCvv": "1234"
+    },
+    "expectedStatus": 400,
+    "expectedError": "CVV должен содержать 3 цифры.",
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "1234"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «CVV должен содержать 3 цифры.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "B05",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06",
+      "R09"
+    ],
+    "title": "Месяц карты 00",
+    "override": {
+      "payment": "card",
+      "cardExpiry": "00/99"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Срок действия карты некорректен или истёк.",
+    "priority": "High",
+    "severity": "High",
+    "defect": "D5-02",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "00/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены."
+  },
+  {
+    "id": "B06",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "Минимальный месяц 01",
+    "override": {
+      "payment": "card",
+      "cardExpiry": "01/99"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "01/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "B07",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06"
+    ],
+    "title": "Максимальный месяц 12",
+    "override": {
+      "payment": "card",
+      "cardExpiry": "12/99"
+    },
+    "expectedStatus": 200,
+    "expectedError": null,
+    "priority": "High",
+    "severity": "High",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "12/99",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 200; заказ processing; total = 24900 ₸; корзина очищена; остаток уменьшен на заказанное количество."
+  },
+  {
+    "id": "B08",
+    "type": "Boundary",
+    "scenario": "TS-03",
+    "requirements": [
+      "R06",
+      "R09"
+    ],
+    "title": "Истёкший срок карты",
+    "override": {
+      "payment": "card",
+      "cardExpiry": "01/00"
+    },
+    "expectedStatus": 400,
+    "expectedError": "Срок действия карты некорректен или истёк.",
+    "priority": "High",
+    "severity": "High",
+    "defect": "D5-02",
+    "items": [
+      [
+        "p001",
+        1
+      ]
+    ],
+    "data": {
+      "address": "г. Астана, ул. Абая 10",
+      "phone": "+7 700 123 45 67",
+      "payment": "card",
+      "cardNumber": "4532015112830366",
+      "cardExpiry": "01/00",
+      "cardCvv": "123"
+    },
+    "preconditions": "Пользователь test@shopkz.kz вошёл с паролем test1234. Корзина: p001 × 1. Начальные остатки: p001 = 14, p002 = 3; цены: 24900 и 38500 ₸.",
+    "steps": [
+      "Подготовить указанный аккаунт и корзину.",
+      "Отправить POST /api/orders с данными Test Data.",
+      "Проверить HTTP-код и JSON ответа.",
+      "Проверить список заказов, корзину и остатки товаров."
+    ],
+    "expectedTotal": 24900,
+    "expectedResult": "HTTP 400; сообщение «Срок действия карты некорректен или истёк.»; заказ не создан, корзина и остатки не изменены."
+  }
+]

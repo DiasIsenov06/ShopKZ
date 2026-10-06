@@ -1,0 +1,152 @@
+
+> shopkz@1.0.0 test
+> jest --runInBand --json --outputFile=practical5/results/regression-jest.json
+
+PASS tests/integration/api.test.js
+  ● Console
+
+    console.error
+      ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.config (server.js:4:19)
+      at Object.require (tests/integration/api.test.js:16:9)
+
+    console.log
+      [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+    console.log
+      [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+    console.log
+      [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+PASS tests/acceptance/acceptance.test.js
+  ● Console
+
+    console.error
+      ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.config (server.js:4:19)
+      at Object.require (tests/acceptance/acceptance.test.js:16:9)
+
+    console.log
+      [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+    console.log
+      [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+    console.log
+      [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+PASS tests/unit/utils.test.js
+PASS tests/integration/defects.test.js
+  ● Console
+
+    console.error
+      ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.config (server.js:4:19)
+      at Object.require (tests/integration/defects.test.js:14:9)
+
+    console.log
+      [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+    console.log
+      [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+    console.log
+      [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+PASS tests/practical5/checkout.test.js
+  ● Console
+
+    console.error
+      ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.config (server.js:4:19)
+      at Object.require (tests/practical5/checkout.test.js:16:55)
+
+    console.log
+      [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+    console.log
+      [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+    console.log
+      [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+
+Test Suites: 5 passed, 5 total
+Tests:       69 passed, 69 total
+Snapshots:   0 total
+Time:        5.338 s
+Ran all test suites.
+Test results written to: practical5/results/regression-jest.json

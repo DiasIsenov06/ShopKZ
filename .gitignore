@@ -1,0 +1,12 @@
+node_modules/
+.env
+shopkz.db
+shopkz.db-wal
+shopkz.db-shm
+shopkz-e2e-test.db
+shopkz-e2e-test.db-wal
+shopkz-e2e-test.db-shm
+coverage/
+test-results/
+playwright-report/
+*.log

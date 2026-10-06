@@ -1,0 +1,74 @@
+
+> shopkz@1.0.0 practical5
+> node practical5/run.js after
+
+  console.error
+    ◇ injected env (0) from .env
+
+      2 | // Запуск: npm install && npm start   →  http://localhost:3000
+      3 |
+    > 4 | require('dotenv').config(); // подхватывает .env, если он есть (см. .env.example)
+        |                   ^
+      5 |
+      6 | const express = require('express');
+      7 | const session = require('express-session');
+
+      at z (node_modules/dotenv/dist/index.cjs:7:300)
+      at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+      at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+      at Object.config (server.js:4:19)
+      at Object.require (tests/practical5/checkout.test.js:16:55)
+
+  console.log
+    [seed] Добавлено товаров: 12
+
+      at Object.log (db.js:99:11)
+
+  console.log
+    [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+
+      at Object.log (db.js:107:11)
+
+  console.log
+    [seed] Добавлены промокоды: SALE10, WELCOME15
+
+      at Object.log (db.js:114:11)
+
+PASS tests/practical5/checkout.test.js
+  ✓ P01 Positive — Заказ с электронным кошельком (130 ms)
+  ✓ P02 Positive — Заказ с корректной картой (88 ms)
+  ✓ P03 Positive — Промокод SALE10 (88 ms)
+  ✓ P04 Positive — Промокод WELCOME15 (83 ms)
+  ✓ P05 Positive — Промокод в нижнем регистре (86 ms)
+  ✓ P06 Positive — Номер карты с пробелами (87 ms)
+  ✓ P07 Positive — Заказ двух единиц товара (135 ms)
+  ✓ P08 Positive — Заказ двух разных товаров (82 ms)
+  ✓ P09 Positive — Удаление пробелов по краям адреса (81 ms)
+  ✓ P10 Positive — CVV из трёх цифр с ведущими нулями (82 ms)
+  ✓ N01 Negative — Оформление без авторизации (2 ms)
+  ✓ N02 Negative — Оформление с пустой корзиной (79 ms)
+  ✓ N03 Negative — Адрес только из пробелов (79 ms)
+  ✓ N04 Negative — Пустой телефон (80 ms)
+  ✓ N05 Negative — Несуществующий промокод (77 ms)
+  ✓ N06 Negative — Номер карты из 15 цифр (82 ms)
+  ✓ N07 Negative — Нарушение контрольной суммы карты (79 ms)
+  ✓ N08 Negative — Тестовый отказ оплаты (77 ms)
+  ✓ N09 Negative — Неизвестный способ оплаты (80 ms)
+  ✓ N10 Negative — Месяц карты 13 (78 ms)
+  ✓ B01 Boundary — Номер карты из 17 цифр (78 ms)
+  ✓ B02 Boundary — CVV из двух цифр (77 ms)
+  ✓ B03 Boundary — CVV ровно из трёх цифр (80 ms)
+  ✓ B04 Boundary — CVV из четырёх цифр (82 ms)
+  ✓ B05 Boundary — Месяц карты 00 (80 ms)
+  ✓ B06 Boundary — Минимальный месяц 01 (83 ms)
+  ✓ B07 Boundary — Максимальный месяц 12 (80 ms)
+  ✓ B08 Boundary — Истёкший срок карты (77 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       28 passed, 28 total
+Snapshots:   0 total
+Time:        2.954 s, estimated 3 s
+Ran all test suites matching /tests\/practical5\/checkout.test.js/i.
+Test results written to: practical5/results/after-jest.json
+
+Результаты: practical5/results/after-results.json

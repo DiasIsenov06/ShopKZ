@@ -1,0 +1,5 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> shopkz@1.0.0 check
+> node --check public/app.js && node --check public/enhancements.js && node --check public/init.js && node --check public/theme.js && node --check server.js && node --check db.js
+

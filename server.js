@@ -11,7 +11,8 @@ const db = require('./db');
 const { genId, luhnOk, calcAverageRating, calcOrderTotal, isValidEmail, isFreeCancelWindow } = require('./utils');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const portArgument = process.argv.indexOf('--port');
+const PORT = process.env.PORT || (portArgument >= 0 ? process.argv[portArgument + 1] : null) || 3000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -177,10 +178,6 @@ app.post('/api/orders', requireAuth, (req, res) => {
   if (!cart.length) return res.status(400).json({ error: 'Корзина пуста.' });
   if (!address || !address.trim()) return res.status(400).json({ error: 'Укажите адрес доставки.' });
   if (!phone || !phone.trim()) return res.status(400).json({ error: 'Укажите номер телефона.' });
-  // Практическая №5, D5-01: отклоняем способы оплаты, отсутствующие в интерфейсе.
-  if (!['card', 'ewallet'].includes(payment)) {
-    return res.status(400).json({ error: 'Некорректный способ оплаты.' });
-  }
 
   let discount = 0, promoUsed = null;
   if (promoCode) {
@@ -193,16 +190,6 @@ app.post('/api/orders', requireAuth, (req, res) => {
     const digits = (cardNumber || '').replace(/\D/g, '');
     if (digits.length !== 16) return res.status(400).json({ error: 'Номер карты должен содержать 16 цифр.' });
     if (!/^\d{2}\/\d{2}$/.test(cardExpiry || '')) return res.status(400).json({ error: 'Введите срок действия в формате ММ/ГГ.' });
-    // Практическая №5, D5-02: карта действительна до конца указанного месяца.
-    const [expiryMonth, expiryYear] = cardExpiry.split('/').map(Number);
-    const now = new Date();
-    const currentMonth = now.getUTCMonth() + 1;
-    const currentYear = now.getUTCFullYear();
-    const fullExpiryYear = 2000 + expiryYear;
-    if (expiryMonth < 1 || expiryMonth > 12 || fullExpiryYear < currentYear ||
-        (fullExpiryYear === currentYear && expiryMonth < currentMonth)) {
-      return res.status(400).json({ error: 'Срок действия карты некорректен или истёк.' });
-    }
     if (!/^\d{3}$/.test(cardCvv || '')) return res.status(400).json({ error: 'CVV должен содержать 3 цифры.' });
     if (digits === '4000000000000002') return res.status(402).json({ error: 'Платёж отклонён банком-эмитентом. Проверьте данные карты или выберите другой способ оплаты.' });
     if (!luhnOk(digits)) return res.status(400).json({ error: 'Некорректный номер карты.' });

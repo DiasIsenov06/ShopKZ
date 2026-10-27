@@ -17,10 +17,10 @@ const EMAIL = 'e2e_' + Date.now() + '@test.kz';
 test('E2E-01: полный путь покупателя — от каталога до подтверждения заказа', async ({ page }) => {
   // 1. Открываем главную страницу
   await page.goto('/');
-  await expect(page.locator('.logo')).toContainText('ShopKZ');
+  await expect(page.locator('.logo').first()).toContainText('ShopKZ');
 
   // 2. Регистрируемся
-  await page.click('text=Войти');
+  await page.locator('header').getByRole('button', {name:'Войти',exact:true}).click();
   await page.click('text=Зарегистрироваться');
   await page.fill('input[name=name]', 'E2E Покупатель');
   await page.fill('input[name=email]', EMAIL);
@@ -53,16 +53,16 @@ test('E2E-01: полный путь покупателя — от каталог
   await expect(page.locator('h2')).toContainText('принят');
 
   // 7. Проверяем, что заказ отображается в "Мои заказы"
-  await page.click('text=Мои заказы');
+  await page.locator('main').getByRole('button', {name:'Мои заказы',exact:true}).click();
   await expect(page.locator('.card')).toContainText('В обработке');
 });
 
 test('E2E-02: платёж тестовой картой-отказом показывает пользователю ошибку', async ({ page }) => {
   await page.goto('/');
-  await page.click('text=Войти');
+  await page.locator('header').getByRole('button', {name:'Войти',exact:true}).click();
   await page.fill('input[name=email]', EMAIL);
   await page.fill('input[name=password]', 'pass123');
-  await page.click('button:has-text("Войти")');
+  await page.locator('main form').getByRole('button', {name:'Войти',exact:true}).click();
 
   await page.click('.p-card .name >> nth=0');
   await page.click('button:has-text("Добавить в корзину")');

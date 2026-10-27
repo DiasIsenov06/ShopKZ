@@ -114,4 +114,10 @@ if (promoCount === 0) {
   console.log('[seed] Добавлены промокоды: SALE10, WELCOME15');
 }
 
+// Replace only the original random-photo placeholders with bundled demo illustrations.
+for (let n = 1; n <= 12; n++) {
+  const id = 'p' + String(n).padStart(3, '0');
+  db.prepare("UPDATE products SET img=? WHERE id=? AND img LIKE 'https://picsum.photos/seed/shopkz-%'")
+    .run('/assets/' + id + '.svg', id);
+}
 module.exports = db;

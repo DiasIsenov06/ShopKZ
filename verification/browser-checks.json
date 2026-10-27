@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-20",
+  "checks": {
+    "theme_persists": "passed",
+    "search_name": "passed",
+    "guest_cart_persists": "passed",
+    "wishlist_persists": "passed",
+    "compare_persists": "passed",
+    "mobile_price_and_stock_filters": "passed: 4 matching products",
+    "cart_remove_undo": "passed",
+    "comparison_table": "passed",
+    "image_dialog_escape_and_focus": "passed",
+    "recently_viewed": "passed"
+  },
+  "responsive": [
+    {
+      "frame_width": 360,
+      "document_client_width": 345,
+      "document_scroll_width": 345,
+      "page_overflow": false
+    },
+    {
+      "frame_width": 390,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "page_overflow": false
+    },
+    {
+      "frame_width": 768,
+      "document_client_width": 753,
+      "document_scroll_width": 753,
+      "page_overflow": false
+    },
+    {
+      "frame_width": 1024,
+      "document_client_width": 1009,
+      "document_scroll_width": 1009,
+      "page_overflow": false
+    },
+    {
+      "frame_width": 1440,
+      "document_client_width": 1425,
+      "document_scroll_width": 1425,
+      "page_overflow": false
+    }
+  ],
+  "limitations": [
+    "Responsive browser QA used a same-origin iframe of the indicated width with classic 15px scrollbars.",
+    "Authenticated checkout was verified by HTTP system tests, not by browser login.",
+    "Playwright runner was not executed."
+  ]
+}

@@ -28,7 +28,8 @@ let state = {
 function uid(prefix){ return prefix + Math.random().toString(36).slice(2,9); }
 function money(n){ return Number(n).toLocaleString('ru-RU') + ' ₸'; }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function jsAttr(s){ return String(s==null?'':s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+function jsAttr(s){ return String(s==null?'':s).replace(/[\\<>&"'\n\r]/g, c => '\\u'+c.charCodeAt(0).toString(16).padStart(4,'0')); }
+
 function toast(msg, kind){
   const wrap = document.getElementById('toast-wrap');
   const el = document.createElement('div');
@@ -172,6 +173,12 @@ function isWished(productId){ return state.wishlistIds.includes(productId); }
 
 /* ---------------------------------------------------------------- checkout / orders */
 async function onCheckoutSubmit(form){
+  if(state.checkoutBusy) return;
+  state.checkoutBusy = true;
+  state.checkoutDraft = {address:form.address.value, phone:form.phone.value, payment:form.payment.value};
+  const submit = form.querySelector('[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='Проверяем заказ…';}
+
   const body = {
     address: form.address.value,
     phone: form.phone.value,
@@ -186,9 +193,9 @@ async function onCheckoutSubmit(form){
     state.appliedPromo = null;
     await refreshCounts();
     await refreshAllProducts();
-    toast('Заказ '+order.id+' оформлен! Уведомление отправлено на '+session.email, 'ok');
+    state.checkoutDraft = null; toast('Учебный заказ '+order.id+' сохранён. Деньги не списываются.', 'ok');
     await navigate('order-confirm', {id: order.id});
-  }catch(e){ state.checkoutError = e.message; await render(); }
+  }catch(e){ state.checkoutError = e.message; await render(); }finally{state.checkoutBusy=false;}
 }
 async function cancelOrder(orderId){
   try{
@@ -211,7 +218,7 @@ async function updateProfile(name,phone,address){
 async function changePassword(oldPassword,newPassword){
   try{
     await api('PUT','/api/profile/password',{oldPassword,newPassword});
-    toast('Пароль изменён. Письмо-подтверждение отправлено на '+session.email, 'ok');
+    toast('Пароль изменён. Email-уведомления в демо не отправляются.', 'ok');
   }catch(e){ toast(e.message,'err'); }
 }
 async function submitReview(productId, rating, text){
@@ -220,6 +227,7 @@ async function submitReview(productId, rating, text){
   try{
     await api('POST','/api/products/'+productId+'/reviews',{rating:Number(rating), text});
     toast('Спасибо за отзыв!', 'ok');
+    await refreshAllProducts();
     await navigate('product', {id: productId});
   }catch(e){ toast(e.message,'err'); }
 }
@@ -251,7 +259,7 @@ async function adminDeleteProduct(id, name){
 async function adminUpdateStatus(orderId, status){
   try{
     await api('PUT','/api/admin/orders/'+orderId+'/status', {status});
-    toast('Статус заказа '+orderId+' изменён на «'+statusLabel(status)+'». Клиенту отправлено уведомление.', 'ok');
+    toast('Статус заказа '+orderId+' изменён на «'+statusLabel(status)+'». Статус сохранён в учебной базе.', 'ok');
     await refreshAllProducts();
     await render();
   }catch(e){ toast(e.message,'err'); }
@@ -301,91 +309,43 @@ async function routeContent(){
 
 function layoutHeader(){
   const cats = ['Все', ...new Set(state.allProducts.map(p=>p.category))];
-  return `
-  <div class="topbar"><div class="topbar-in">
-    <span>ShopKZ — учебная демо-платформа для практических работ по тестированию ПО</span>
-    <span>${session ? 'Вы вошли как <b>'+esc(session.name)+'</b>'+(session.role==='admin'?' (админ)':'') : 'Гость'}</span>
-  </div></div>
-  <header class="site"><div class="header-in">
-    <a class="logo" href="#" onclick="navigate('home');return false;">Shop<span>KZ</span></a>
-    <form class="searchbar" onsubmit="state.search=this.q.value;navigate('home');return false;">
-      <input name="q" placeholder="Найти товар…" value="${esc(state.search)}">
-      <button type="submit">Найти</button>
-    </form>
-    <div class="nav-icons">
-      <button class="icon-btn" onclick="navigate('wishlist');return false;">
-        <span class="icon-glyph">♡</span>Избранное
-        ${state.wishlistIds.length ? `<span class="badge">${state.wishlistIds.length}</span>` : ''}
-      </button>
-      <button class="icon-btn" onclick="navigate('cart');return false;">
-        <span class="icon-glyph">🛒</span>Корзина
-        ${cartCount() ? `<span class="badge">${cartCount()}</span>` : ''}
-      </button>
-      ${session ? `
-        <button class="icon-btn" onclick="navigate('orders');return false;"><span class="icon-glyph">📦</span>Заказы</button>
-        <button class="icon-btn" onclick="navigate('profile');return false;"><span class="icon-glyph">👤</span>Профиль</button>
-        ${session.role==='admin' ? `<button class="icon-btn" onclick="navigate('admin');return false;"><span class="icon-glyph">⚙</span>Админ</button>` : ''}
-        <button class="icon-btn" onclick="logout();return false;"><span class="icon-glyph">⏻</span>Выйти</button>
-      ` : `<button class="icon-btn" onclick="navigate('auth',{mode:'login'});return false;"><span class="icon-glyph">👤</span>Войти</button>`}
-    </div>
-  </div>
-  <div class="catnav"><div class="catnav-in">
-    ${cats.map(c=>`<a class="chip ${state.category===c?'active':''}" href="#" onclick="state.category='${esc(c)}';navigate('home');return false;">${esc(c)}</a>`).join('')}
-  </div></div>
-  </header>`;
-}
-function layoutFooter(){
-  return `<footer class="site"><div class="footer-in">
-    <span>© ShopKZ — демо-объект тестирования. Создан для практических работ №1 и №2 по анализу требований и STLC.</span>
-    <span>Тестовая карта для проверки отказа платежа: 4000 0000 0000 0002</span>
-  </div></footer>`;
+  const nav = (route,label,ico,count=0) => `<button class="icon-btn ${state.route===route?'current':''}" onclick="navigate('${route}')">${icon(ico)}<span>${label}</span>${count?`<span class="badge">${count}</span>`:''}</button>`;
+  return `<div class="topbar"><div class="topbar-in"><span>Вещи для вашего ритма</span><span>${session?'Вы вошли как <b>'+esc(session.name)+'</b>':'Казахстан · цены в тенге'}</span></div></div>
+  <header class="site"><div class="header-in"><a class="logo" href="#home" onclick="navigate('home');return false;">Shop<span>KZ</span><i></i></a>
+  <button class="catalog-button" onclick="goCatalog()">${icon('grid')}<span>Каталог</span></button>
+  <form class="searchbar" role="search" onsubmit="event.preventDefault();searchCatalog(this.q.value)"><label class="sr-only" for="site-search">Поиск товаров</label>${icon('search')}<input id="site-search" name="q" autocomplete="off" placeholder="Что найдём сегодня?" value="${esc(state.search)}" oninput="searchSuggestions(this.value)" aria-controls="suggestions"><button type="submit" aria-label="Найти">${icon('arrow')}</button><div id="suggestions" class="suggestions" hidden></div></form>
+  <div class="nav-icons">${nav('wishlist','Избранное','heart',state.wishlistIds.length)}${nav('compare','Сравнение','compare',state.compareIds.length)}${nav('cart','Корзина','bag',cartCount())}${nav(session?'profile':'auth',session?'Профиль':'Войти','user')}</div>
+  <label class="theme-control" title="Цветовая тема">${icon('sun')}<span class="sr-only">Тема</span><select aria-label="Цветовая тема" onchange="setTheme(this.value)">${[['system','Система'],['light','Светлая'],['dark','Тёмная']].map(([v,l])=>`<option value="${v}" ${themeChoice()===v?'selected':''}>${l}</option>`).join('')}</select></label>
+  </div><nav class="catnav" aria-label="Категории"><div class="catnav-in">${cats.map(c=>`<button class="chip ${state.category===c?'active':''}" onclick="chooseCategory('${jsAttr(c)}')">${esc(c==='Все'?'Все товары':c)}</button>`).join('')}<span class="nav-note">Подберите своё</span>${session?`<button class="chip" onclick="navigate('orders')">Мои заказы</button>${session.role==='admin'?`<button class="chip" onclick="navigate('admin')">Админ</button>`:''}<button class="chip" onclick="logout()">Выйти</button>`:''}</div></nav></header>`;
 }
 
-/* ---------------------------------------------------------------- HOME */
+function layoutFooter(){return `<footer class="site"><div class="footer-in"><div><a class="logo" href="#home" onclick="navigate('home');return false;">Shop<span>KZ</span><i></i></a><p>Техника, стиль и дом.<br>Соберите то, что подходит вам.</p></div><div><b>Ваш ShopKZ</b><button onclick="goCatalog()">Каталог товаров</button><button onclick="navigate('wishlist')">Избранное</button><button onclick="navigate('orders')">Мои заказы</button></div><div><b>О проекте</b><p>Учебный интернет-магазин.<br>Заказы сохраняются в локальной базе.<br>Оплата и доставка демонстрационные.</p></div></div><div class="footer-bottom">© ${new Date().getFullYear()} ShopKZ <span>Сделано для удобных покупок</span></div></footer><button class="back-top" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})">${icon('up')}</button>`;}
+
 async function viewHome(){
-  const q = new URLSearchParams();
-  if(state.search) q.set('search', state.search);
-  if(state.category!=='Все') q.set('category', state.category);
-  if(state.sort!=='default') q.set('sort', state.sort);
-  const {products: list} = await api('GET','/api/products?'+q.toString());
-
-  return `
-  <div style="margin-top:26px;padding:34px 30px;border-radius:var(--radius);background:linear-gradient(120deg,var(--primary-dark),var(--primary));color:#fff;">
-    <h1 class="display" style="color:#fff;font-size:30px;max-width:520px;">Всё для дома, стиля и техники — в одном каталоге</h1>
-    <p style="opacity:.85;max-width:480px;margin-top:8px;">${state.allProducts.length} товаров, ${new Set(state.allProducts.map(p=>p.category)).size} категории. Доставка по всему Казахстану.</p>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-    <h2 class="section-title">${state.category==='Все'?'Каталог':esc(state.category)} ${state.search?'· поиск: «'+esc(state.search)+'»':''} <span class="muted" style="font-size:14px;font-weight:400;">(${list.length})</span></h2>
-    <select onchange="state.sort=this.value;render();" style="border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;background:#fff;">
-      <option value="default" ${state.sort==='default'?'selected':''}>По умолчанию</option>
-      <option value="price_asc" ${state.sort==='price_asc'?'selected':''}>Сначала дешевле</option>
-      <option value="price_desc" ${state.sort==='price_desc'?'selected':''}>Сначала дороже</option>
-      <option value="rating" ${state.sort==='rating'?'selected':''}>По рейтингу</option>
-    </select>
-  </div>
-  ${list.length ? `<div class="grid-products">${list.map(productCard).join('')}</div>` : `<div class="empty-state">Ничего не найдено. Попробуйте изменить запрос или категорию.</div>`}
-  `;
+  let list = state.allProducts.filter(p=>state.category==='Все'||p.category===state.category);
+  const query=state.search.trim().toLocaleLowerCase('ru');
+  if(query) list=list.filter(p=>`${p.name} ${p.category} ${p.desc}`.toLocaleLowerCase('ru').includes(query));
+  if(state.minPrice!=='')list=list.filter(p=>p.price>=Number(state.minPrice));
+  if(state.maxPrice!=='')list=list.filter(p=>p.price<=Number(state.maxPrice));
+  if(state.onlyStock)list=list.filter(p=>p.stock>0);
+  if(state.sort==='price_asc')list.sort((a,b)=>a.price-b.price);
+  if(state.sort==='price_desc')list.sort((a,b)=>b.price-a.price);
+  if(state.sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+  if(state.sort==='rating')list.sort((a,b)=>b.avgRating-a.avgRating);
+  const filtered=!!query||state.category!=='Все'||state.minPrice!==''||state.maxPrice!==''||state.onlyStock;
+  const hero=!filtered?`<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><span class="eyebrow"><i></i> ВАШ ПОВСЕДНЕВНЫЙ ВЫБОР</span><h1 id="hero-title">Хорошие вещи.<br>Ваш <em>ритм жизни.</em></h1><p>От первого кофе до любимого плейлиста.<br>Техника, одежда и вещи для дома — в ShopKZ.</p><button class="btn btn-primary hero-cta" onclick="goCatalog()">Найти своё ${icon('arrow')}</button><div class="hero-foot"><span>${state.allProducts.length} товаров в каталоге</span><span>Без лишней суеты</span></div></div><div class="hero-art"><div class="orbit"></div><span class="art-label">ПОВСЕДНЕВНОЕ / ОСОБЕННОЕ</span><img class="hero-headphones" src="/assets/p001.svg" alt="Иллюстрация наушников AirBeat Pro" width="500" height="500" fetchpriority="high"><span class="hero-stamp">Включите<br>свой мир ${icon('arrow')}</span><span class="art-caption">AIRBEAT PRO · ИЛЛЮСТРАЦИЯ</span></div></section>
+  <section class="category-tiles" aria-label="Подборки по категориям">${[['Электроника','Технологии на каждый день','p002'],['Одежда','В вашем стиле','p012'],['Бытовая техника','Дома — лучше','p008']].filter(([c])=>state.allProducts.some(p=>p.category===c)).map(([c,t,id],i)=>`<button class="category-tile cat-${i}" onclick="chooseCategory('${jsAttr(c)}')"><div><span class="eyebrow">${esc(c)}</span><h2>${t}</h2><span class="tile-link">Смотреть ${icon('arrow')}</span></div><img src="/assets/${id}.svg" alt="" width="180" height="180" loading="lazy"></button>`).join('')}</section>`:'';
+  const selected=[state.category!=='Все'?['category',state.category]:null,query?['search','Поиск: '+state.search]:null,state.minPrice!==''?['minPrice','От '+money(state.minPrice)]:null,state.maxPrice!==''?['maxPrice','До '+money(state.maxPrice)]:null,state.onlyStock?['onlyStock','В наличии']:null].filter(Boolean);
+  return `${hero}<section id="catalog" class="catalog-section"><div class="section-head"><div><span class="eyebrow">ПОДОБРАНО ДЛЯ ВАС</span><h2>${esc(state.category==='Все'?'Найдите свою вещь':state.category)}<span class="result-count">${list.length}</span></h2></div><label class="sort-label">Сортировка<select aria-label="Сортировка" onchange="state.sort=this.value;catalogRender()">${[['default','По умолчанию'],['price_asc','Сначала дешевле'],['price_desc','Сначала дороже'],['name','По названию'],['rating','По рейтингу']].map(([v,l])=>`<option value="${v}" ${state.sort===v?'selected':''}>${l}</option>`).join('')}</select></label></div>
+  <div class="active-filters">${selected.map(([k,v])=>`<button onclick="clearFilter('${k}')">${esc(v)} ×</button>`).join('')}${selected.length?'<button class="reset-link" onclick="resetFilters()">Сбросить всё</button>':''}</div><button class="mobile-filter btn btn-outline" onclick="openFilters()">${icon('sliders')} Фильтры ${selected.length?'('+selected.length+')':''}</button>
+  <div class="catalog-layout"><aside class="filters" aria-label="Фильтры каталога">${filterForm()}</aside><div>${list.length?`<div class="grid-products">${list.map(productCard).join('')}</div>`:`<div class="empty-state">${icon('search')}<h3>Ничего не нашли</h3><p>Попробуйте другой запрос или измените фильтры.</p><button class="btn btn-primary" onclick="resetFilters()">Сбросить фильтры</button></div>`}</div></div></section>${recentSection()}`;
 }
 
 function productCard(p){
-  return `
-  <div class="p-card">
-    <a href="#" onclick="navigate('product',{id:'${p.id}'});return false;" style="color:inherit;">
-      <div class="thumb"><img src="${p.img}" alt="${esc(p.name)}" loading="lazy"></div>
-    </a>
-    <button class="wish-toggle" onclick="toggleWishlist('${p.id}');return false;" title="В избранное">${isWished(p.id)?'♥':'♡'}</button>
-    <div class="body">
-      <span class="cat">${esc(p.category)}</span>
-      <a href="#" onclick="navigate('product',{id:'${p.id}'});return false;"><span class="name">${esc(p.name)}</span></a>
-      ${p.avgRating ? `<span class="stars">${starString(p.avgRating)} <span class="muted">(${p.reviewCount})</span></span>` : `<span class="muted" style="font-size:12px;">Пока нет отзывов</span>`}
-      ${p.stock===0 ? `<span class="out-of-stock">Нет в наличии</span>` : (p.stock<=3 ? `<span class="low-stock">Осталось: ${p.stock}</span>` : '')}
-      <span class="price">${money(p.price)}</span>
-      <button class="btn btn-primary btn-sm" ${p.stock===0?'disabled':''} onclick="addToCart('${p.id}',1);return false;">${p.stock===0?'Нет в наличии':'В корзину'}</button>
-    </div>
-  </div>`;
+ const id=jsAttr(p.id), wished=isWished(p.id), compared=state.compareIds.includes(p.id);
+ return `<article class="p-card"><a class="product-image-link" href="#product?id=${encodeURIComponent(p.id)}" onclick="navigate('product',{id:'${id}'});return false;"><div class="thumb"><img src="${esc(safeImage(p.img))}" alt="${esc(p.name)}" width="500" height="500" loading="lazy" onerror="this.onerror=null;this.src='/assets/fallback.svg'"></div></a><button class="wish-toggle ${wished?'selected':''}" aria-label="${wished?'Удалить из избранного':'В избранное'}" aria-pressed="${wished}" onclick="toggleWishlist('${id}')">${icon('heart')}</button><button class="compare-toggle ${compared?'selected':''}" aria-label="${compared?'Убрать из сравнения':'Сравнить товар'}" aria-pressed="${compared}" onclick="toggleCompare('${id}')">${icon('compare')}</button><div class="body"><span class="cat">${esc(p.category)}</span><a href="#product?id=${encodeURIComponent(p.id)}" onclick="navigate('product',{id:'${id}'});return false;"><span class="name">${esc(p.name)}</span></a><div class="product-meta">${p.avgRating?`<span class="stars">★ ${Number(p.avgRating).toFixed(1)} <span class="muted">(${p.reviewCount})</span></span>`:'<span class="muted">Нет отзывов</span>'}<span class="stock-dot ${p.stock?'':'unavailable'}">${p.stock?'В наличии':'Нет в наличии'}</span></div><div class="product-bottom"><span class="price">${money(p.price)}</span><button class="btn btn-primary btn-sm" ${p.stock===0?'disabled':''} onclick="addToCart('${id}',1)">${p.stock===0?'Нет в наличии':'В корзину'} ${p.stock?icon('plus'):''}</button></div></div></article>`;
 }
 
-/* ---------------------------------------------------------------- PRODUCT */
 async function viewProduct(id){
   let data;
   try{ data = await api('GET','/api/products/'+id); }
@@ -395,7 +355,7 @@ async function viewProduct(id){
   return `
   <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Каталог</a> / ${esc(p.category)} / ${esc(p.name)}</div>
   <div class="p-detail">
-    <div class="thumb-big"><img src="${p.img}" alt="${esc(p.name)}"></div>
+    <div class="product-visual"><button class="thumb-big zoom-trigger" onclick="openImage('${jsAttr(p.id)}')" aria-label="Увеличить изображение"><img src="${esc(safeImage(p.img))}" alt="${esc(p.name)}" width="500" height="500" onerror="this.onerror=null;this.src='/assets/fallback.svg'"></button><span class="image-caption">${String(p.img||'').startsWith('/assets/p')?'Иллюстрация модели · ':''}Нажмите, чтобы рассмотреть</span></div>
     <div>
       <span class="muted">${esc(p.category)}</span>
       <h1 style="font-size:26px;margin:6px 0 10px;">${esc(p.name)}</h1>
@@ -458,7 +418,7 @@ function viewCart(){
   <div style="display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;">
     <div class="card" style="padding:6px 18px;">
       ${cart.map(i=>`<div class="cart-row">
-          <img src="${i.img}" alt="">
+          <img src="${esc(safeImage(i.img))}" onerror="this.onerror=null;this.src='/assets/fallback.svg'" alt="">
           <div>
             <a href="#" onclick="navigate('product',{id:'${i.productId}'});return false;"><b>${esc(i.name)}</b></a>
             <div class="muted" style="font-size:12.5px;">${money(i.price)} / шт</div>
@@ -474,14 +434,14 @@ function viewCart(){
     </div>
     <div class="cart-summary">
       <form onsubmit="applyPromo(this.code.value);return false;" style="display:flex;gap:6px;margin-bottom:14px;">
-        <input name="code" placeholder="Промокод" style="flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;" value="${state.appliedPromo?state.appliedPromo.code:''}">
+        <input name="code" placeholder="Промокод" style="flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;" value="${state.appliedPromo?esc(state.appliedPromo.code):''}">
         <button class="btn btn-outline btn-sm" type="submit">ОК</button>
       </form>
       ${state.promoError ? `<div class="error-text">${esc(state.promoError)}</div>` : ''}
-      ${state.appliedPromo ? `<div class="success-text">Промокод ${state.appliedPromo.code} применён (-${state.appliedPromo.percent}%)</div>` : ''}
+      ${state.appliedPromo ? `<div class="success-text">Промокод ${esc(state.appliedPromo.code)} применён (-${state.appliedPromo.percent}%)</div>` : ''}
       <div class="line"><span>Сумма товаров</span><span>${money(subtotal)}</span></div>
-      ${discount ? `<div class="line"><span>Скидка</span><span>-${discount}%</span></div>` : ''}
-      <div class="line total"><span>Итого</span><span>${money(total)}</span></div>
+      ${discount ? `<div class="line"><span>Скидка (${discount}%)</span><span>−${money(subtotal-total)}</span></div>` : ''}
+      <div class="line"><span>Доставка в демо</span><span>0 ₸</span></div><div class="line total"><span>Итого</span><span>${money(total)}</span></div>
       <button class="btn btn-primary" style="width:100%;margin-top:12px;" onclick="navigate('checkout')">Оформить заказ</button>
     </div>
   </div>`;
@@ -496,12 +456,12 @@ async function viewCheckout(){
   const discount = state.appliedPromo ? state.appliedPromo.percent : 0;
   const total = Math.round(subtotal*(1-discount/100));
   return `
-  <h2 class="section-title">Оформление заказа</h2>
+  <h2 class="section-title">Оформление заказа</h2><div class="demo-notice">Учебное оформление. Деньги не списываются. Используйте только тестовые данные карты: 4532 0151 1283 0366, срок 12/29, CVV 123. Заказ сохраняется в локальную базу.</div>
   <div style="display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;">
     <form class="card" style="padding:22px;" onsubmit="onCheckoutSubmit(this);return false;">
       <h3 style="font-size:16px;margin-bottom:14px;">Доставка</h3>
-      <div class="field"><label>Адрес доставки</label><input name="address" required value="${esc(session.address||'')}" placeholder="Город, улица, дом, квартира"></div>
-      <div class="field"><label>Телефон</label><input name="phone" required value="${esc(session.phone||'')}" placeholder="+7 700 000 00 00"></div>
+      <div class="field"><label>Адрес доставки</label><input name="address" required value="${esc(state.checkoutDraft?.address ?? session.address ?? '')}" placeholder="Город, улица, дом, квартира"></div>
+      <div class="field"><label>Телефон</label><input name="phone" required value="${esc(state.checkoutDraft?.phone ?? session.phone ?? '')}" placeholder="+7 700 000 00 00"></div>
       <h3 style="font-size:16px;margin:20px 0 14px;">Оплата</h3>
       <div class="field">
         <label><input type="radio" name="payment" value="card" checked onclick="document.getElementById('cardFields').style.display='block'"> Банковская карта</label>
@@ -512,7 +472,7 @@ async function viewCheckout(){
         <div class="hint" style="margin:-8px 0 12px;">Для проверки отказа платежа используйте 4000 0000 0000 0002</div>
         <div class="row">
           <div class="field"><label>Срок действия</label><input name="cardExpiry" placeholder="ММ/ГГ" maxlength="5"></div>
-          <div class="field"><label>CVV</label><input name="cardCvv" placeholder="000" maxlength="3"></div>
+          <div class="field"><label>CVV</label><input type="password" inputmode="numeric" autocomplete="off" name="cardCvv" placeholder="000" maxlength="3"></div>
         </div>
       </div>
       ${state.checkoutError ? `<div class="error-text">${esc(state.checkoutError)}</div>` : ''}
@@ -522,8 +482,8 @@ async function viewCheckout(){
       <h3 style="font-size:15px;margin-bottom:10px;">Ваш заказ</h3>
       ${cart.map(i=>`<div class="line"><span>${esc(i.name)} × ${i.qty}</span><span>${money(i.price*i.qty)}</span></div>`).join('')}
       <div class="line"><span>Сумма</span><span>${money(subtotal)}</span></div>
-      ${discount?`<div class="line"><span>Скидка</span><span>-${discount}%</span></div>`:''}
-      <div class="line total"><span>Итого</span><span>${money(total)}</span></div>
+      ${discount?`<div class="line"><span>Скидка (${discount}%)</span><span>−${money(subtotal-total)}</span></div>`:''}
+      <div class="line"><span>Доставка в демо</span><span>0 ₸</span></div><div class="line total"><span>Итого</span><span>${money(total)}</span></div>
     </div>
   </div>`;
 }
@@ -536,7 +496,7 @@ async function viewOrderConfirm(id){
   <div class="empty-state">
     <div style="font-size:44px;">✅</div>
     <h2 style="margin:10px 0;">Заказ ${order.id} принят</h2>
-    <p class="muted">Мы отправили подтверждение на ${esc(order.user_email)}. Сумма к оплате: <b>${money(order.total)}</b></p>
+    <p class="muted">Учебный заказ сохранён для ${esc(order.user_email)}. Реальной оплаты и отправки письма нет. Итог: <b>${money(order.total)}</b></p>
     <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;">
       <button class="btn btn-primary" onclick="navigate('orders')">Мои заказы</button>
       <button class="btn btn-outline" onclick="navigate('home')">Продолжить покупки</button>
@@ -754,10 +714,3 @@ async function renderModal(){
   </div>`;
 }
 
-/* ---------------------------------------------------------------- init */
-(async function init(){
-  try{ session = (await api('GET','/api/me')).user; }catch(e){ session = null; }
-  await refreshAllProducts();
-  await refreshCounts();
-  await render();
-})();

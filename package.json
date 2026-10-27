@@ -13,12 +13,11 @@
     "test:coverage": "jest --coverage --runInBand",
     "test:system": "node tests/system/system.test.js",
     "test:e2e": "playwright test tests/e2e",
-    "practical5": "node practical5/run.js after",
-    "practical5:before": "node practical5/run.js before"
+    "check": "node --check public/app.js && node --check public/enhancements.js && node --check public/init.js && node --check public/theme.js && node --check server.js && node --check db.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "better-sqlite3": "^11.3.0",
+    "better-sqlite3": "^12.11.1",
     "dotenv": "^18.0.1",
     "express": "^4.19.2",
     "express-session": "^1.18.0"
@@ -29,7 +28,7 @@
     "supertest": "^7.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "jest": {
     "testPathIgnorePatterns": [

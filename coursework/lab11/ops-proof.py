@@ -39,17 +39,25 @@ try:
  event('Kuma DOWN then UP confirmed')
  # Policy restart is checked separately from intentional docker compose stop.
  container=dc('ps','-q','shopkz',capture_output=True,text=True).stdout.strip()
- # Namespace PID 1 can ignore a SIGKILL sent by another container process.
- # Ask Node's local inspector to exit the main process instead, so this is
- # an application crash rather than a manual docker stop/kill policy override.
- crash="process.kill(1,'SIGUSR1');setTimeout(async()=>{const a=await(await fetch('http://127.0.0.1:9229/json/list')).json();const w=new WebSocket(a[0].webSocketDebuggerUrl);w.onopen=()=>{w.send(JSON.stringify({id:1,method:'Runtime.evaluate',params:{expression:'process.exit(23)'}}));setTimeout(()=>w.close(),200);};},600);setTimeout(()=>process.exit(2),5000);"
- started=time.monotonic();subprocess.run(['docker','exec',container,'node','-e',crash],check=False,capture_output=True,timeout=15)
- time.sleep(1);waithealthy()
+ # Use a disposable app image that exits once from its own main process.
+ # The marker lives in the demo volume, so the restarted process stays healthy.
+ original_good=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]['Image']
+ crash_code="const f=require('fs');require('./server.js');setTimeout(()=>{const p='/app/data/crashed-once';if(!f.existsSync(p)){f.writeFileSync(p,'1');process.exit(23);}},3000);"
+ change='CMD '+json.dumps(['node','-e',crash_code])
+ subprocess.run(['docker','commit','--change',change,container,'shopkz-lab11-crash:exercise'],check=True,capture_output=True)
+ restart_override=OUT/'restart-version.yaml';restart_override.write_text('services:\n  shopkz:\n    image: shopkz-lab11-crash:exercise\n')
+ subprocess.run(base+['-f',str(restart_override),'up','-d','--no-build','--force-recreate','shopkz'],check=True)
+ container=dc('ps','-q','shopkz',capture_output=True,text=True).stdout.strip()
+ started=time.monotonic()
+ for _ in range(40):
+  inspected=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]
+  if inspected['RestartCount']>=1 and healthy():break
+  time.sleep(.5)
+ else:raise RuntimeError('Automatic restart not observed')
  for _ in range(3):
   assert healthy();time.sleep(.3)
  recovery=time.monotonic()-started
- inspected=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]
- assert inspected['RestartCount']>=1
+ assert recovery<=30,recovery
  # Rollback rehearsal with two real disposable image IDs. The bad version
  # intentionally exits on startup. No schema migration is introduced.
  old_id='rollback-proof-order'
@@ -57,7 +65,7 @@ try:
  subprocess.run(['docker','exec',container,'node','-e',seed],check=True,capture_output=True)
  backup="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.backup('/app/data/pre-rollback.db').then(()=>d.close());"
  subprocess.run(['docker','exec',container,'node','-e',backup],check=True,capture_output=True)
- good_image=inspected['Image']
+ good_image=original_good
  bad_image=subprocess.run(['docker','commit','--change','CMD ["node","-e","process.exit(23)"]',container,'shopkz-lab11-bad:exercise'],check=True,capture_output=True,text=True).stdout.strip()
  bad_override=OUT/'bad-version.yaml';bad_override.write_text('services:\n  shopkz:\n    image: shopkz-lab11-bad:exercise\n')
  subprocess.run(base+['-f',str(bad_override),'up','-d','--no-build','--force-recreate','shopkz'],check=True)

@@ -43,6 +43,19 @@ try:
  time.sleep(1);waithealthy();recovery=time.monotonic()-started
  inspected=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]
  assert inspected['RestartCount']>=1
+ # Code rollback rehearsal: recreate the exact same known-good image, preserve data.
+ # No schema migration is introduced in this exercise.
+ old_id='rollback-proof-order'
+ seed="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.prepare(\"INSERT INTO orders(id,user_email,items,total) VALUES(?,?,?,?)\").run('rollback-proof-order','rollback@example.test','[]',19350);console.log(d.pragma('integrity_check'));d.close();"
+ subprocess.run(['docker','exec',container,'node','-e',seed],check=True,capture_output=True)
+ backup="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.backup('/app/data/pre-rollback.db').then(()=>d.close());"
+ subprocess.run(['docker','exec',container,'node','-e',backup],check=True,capture_output=True)
+ rollback_start=time.monotonic();dc('up','-d','--no-build','--force-recreate','shopkz');waithealthy()
+ container=dc('ps','-q','shopkz',capture_output=True,text=True).stdout.strip()
+ check="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);const o=d.prepare('SELECT total FROM orders WHERE id=?').get('rollback-proof-order');if(!o||o.total!==19350||d.pragma('integrity_check',{simple:true})!=='ok')process.exit(1);console.log(JSON.stringify({order_preserved:true,integrity:'ok'}));d.close();"
+ subprocess.run(['docker','exec',container,'node','-e',check],check=True,capture_output=True)
+ rollback={'same_known_good_image':True,'order_preserved':True,'integrity':'ok','seconds':time.monotonic()-rollback_start,'schema_migration_tested':False}
+ (OUT/'rollback.json').write_text(json.dumps(rollback,indent=2));event('known-good image recreation preserves order')
  (OUT/'summary.json').write_text(json.dumps({'monitor_statuses':statuses,'restart_count':inspected['RestartCount'],'restart_recovery_seconds':recovery,'events':events},indent=2))
  (OUT/'events.json').write_text(json.dumps(events,indent=2))
  # screenshot only after login, credentials never appear in the image

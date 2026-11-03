@@ -35,7 +35,10 @@ def run(replay=False):
   # Project issue bodies contain planning prose. Send only selected public fields.
   facts={'period':sid,'start':since,'end_exclusive':until,'issues_created':len(created),'issues_closed':len(closed),'commit_count':len(cs),'open_at_end':len(open_end),'production_deployments':None,'budget_actual':None,'issue_refs':[{'number':i['number'],'title':i['title']} for i in open_end[:8]],'commit_refs':[c['sha'] for c in cs],'historical_state_caveat':'created_at/closed_at reconstruction; reopen history not available, open_at_end is provisional','period_caveat':'retrospective 14-day analysis windows, formal sprint IDs not supplied'}
   all_facts.append(facts)
-  payload={'model':'qwen2.5:0.5b','messages':[{'role':'system','content':PROMPT},{'role':'user','content':json.dumps(facts,ensure_ascii=False)}],'stream':False,'format':'json','options':{'temperature':0,'seed':42,'num_ctx':2048,'num_predict':220,'num_thread':2},'keep_alive':'30m'}
+  # Strict schema avoids copying the entire source into a truncated response.
+  schema={'type':'object','properties':{**{k:{'type':'integer'} for k in ['issues_created','issues_closed','commit_count','open_at_end']},'production_deployments':{'type':'null'},'budget_actual':{'type':'null'},'summary':{'type':'string','maxLength':120},'risks':{'type':'array','items':{'type':'string','maxLength':80},'maxItems':2}},'required':['issues_created','issues_closed','commit_count','open_at_end','production_deployments','budget_actual','summary','risks'],'additionalProperties':False}
+  compact={k:v for k,v in facts.items() if k not in ['issue_refs','commit_refs']}
+  payload={'model':'qwen2.5:0.5b','messages':[{'role':'system','content':PROMPT+' Keep summary under 15 words and at most one short risk. Do not reproduce source fields outside the schema.'},{'role':'user','content':json.dumps(compact,ensure_ascii=False)}],'stream':False,'format':schema,'options':{'temperature':0,'seed':42,'num_ctx':2048,'num_predict':220,'num_thread':2},'keep_alive':'30m'}
   t=time.perf_counter();r=requests.post(os.getenv('OLLAMA_URL','http://127.0.0.1:11434')+'/api/chat',json=payload,timeout=360);r.raise_for_status();raw=r.json();text=raw['message']['content']
   try:claims=json.loads(text)
   except ValueError:claims={'parse_error':True,'raw':text}

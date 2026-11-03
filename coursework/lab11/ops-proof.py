@@ -39,8 +39,15 @@ try:
  event('Kuma DOWN then UP confirmed')
  # Policy restart is checked separately from intentional docker compose stop.
  container=dc('ps','-q','shopkz',capture_output=True,text=True).stdout.strip()
- started=time.monotonic();subprocess.run(['docker','exec',container,'node','-e','process.kill(1,"SIGKILL")'],check=False,capture_output=True)
- time.sleep(1);waithealthy();recovery=time.monotonic()-started
+ # Namespace PID 1 can ignore a SIGKILL sent by another container process.
+ # Ask Node's local inspector to exit the main process instead, so this is
+ # an application crash rather than a manual docker stop/kill policy override.
+ crash="process.kill(1,'SIGUSR1');setTimeout(async()=>{const a=await(await fetch('http://127.0.0.1:9229/json/list')).json();const w=new WebSocket(a[0].webSocketDebuggerUrl);w.onopen=()=>{w.send(JSON.stringify({id:1,method:'Runtime.evaluate',params:{expression:'process.exit(23)'}}));setTimeout(()=>w.close(),200);};},600);setTimeout(()=>process.exit(2),5000);"
+ started=time.monotonic();subprocess.run(['docker','exec',container,'node','-e',crash],check=False,capture_output=True,timeout=15)
+ time.sleep(1);waithealthy()
+ for _ in range(3):
+  assert healthy();time.sleep(.3)
+ recovery=time.monotonic()-started
  inspected=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]
  assert inspected['RestartCount']>=1
  # Rollback rehearsal with two real disposable image IDs. The bad version

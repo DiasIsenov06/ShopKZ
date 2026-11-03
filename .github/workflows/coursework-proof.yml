@@ -1,0 +1,53 @@
+name: Coursework execution evidence
+on:
+  push:
+    branches: [lab11-15-completion]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  monitoring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Docker Kuma DOWN UP and restart proof
+        env:
+          SHOPKZ_SESSION_SECRET: ${{ github.run_id }}-isolated-demo-only-never-production
+          KUMA_DEMO_PASSWORD: Lab11-Demo-Only-${{ github.run_id }}!
+        run: python coursework/lab11/ops-proof.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lab11-docker-evidence
+          path: coursework/lab11/results/docker/
+  pm-reports:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: curl -fsSL https://ollama.com/install.sh | sh
+      - name: Reproduce two historical reporting periods
+        run: |
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://localhost:11434/api/version && break || sleep 1; done
+          ollama pull qwen2.5:0.5b
+          python coursework/lab13/pm_assistant.py --replay
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lab13-pm-reports
+          path: |
+            coursework/lab13/*_report.md
+            coursework/lab13/*_raw.json
+            coursework/lab13/facts.json
+            coursework/lab13/generation_timing.json

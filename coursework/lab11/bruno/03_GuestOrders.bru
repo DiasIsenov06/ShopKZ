@@ -1,0 +1,13 @@
+meta {
+  name: Guest cannot read orders
+  type: http
+  seq: 3
+}
+get {
+  url: {{baseUrl}}/api/orders
+  body: none
+  auth: none
+}
+tests {
+  test("unauthorized", function () { expect(res.getStatus()).to.equal(401); });
+}

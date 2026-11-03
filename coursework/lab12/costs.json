@@ -1,0 +1,47 @@
+{
+  "as_of": "2026-11-03",
+  "currency": "USD",
+  "commercial_scenario_model": "gpt-4.1-mini",
+  "model_status": "Legacy/deprecated marker appears on official model page; cost comparison only, not a new deployment recommendation",
+  "tokenizer": "o200k_base",
+  "token_scope": "exact content tokens on recorded prompts and outputs; chat framing, retries, reasoning and tool tokens excluded; commercial model outputs were not measured",
+  "input_price_per_million": 0.4,
+  "output_price_per_million": 1.6,
+  "price_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+  "gpu_source": "https://www.runpod.io/pricing",
+  "gpu": "RTX 4090 Pod listed hourly rate",
+  "gpu_hourly_usd": 0.89,
+  "hours_per_month_assumption": 730,
+  "input_tokens_mean": 93.03333333333333,
+  "output_tokens_mean": 5,
+  "cost_per_request_usd": 4.521333333333333e-05,
+  "scenarios": [
+    {
+      "requests": 10000,
+      "input_tokens": 930333.3333333334,
+      "output_tokens": 50000,
+      "api_usd": 0.4521333333333333,
+      "gpu_compute_usd": 649.7
+    },
+    {
+      "requests": 100000,
+      "input_tokens": 9303333.333333334,
+      "output_tokens": 500000,
+      "api_usd": 4.521333333333333,
+      "gpu_compute_usd": 649.7
+    }
+  ],
+  "gpu_monthly_compute_usd": 649.7,
+  "break_even_requests_compute_only": 14369655,
+  "break_even_rps": 5.467905239359089,
+  "not_included": [
+    "GPU storage",
+    "egress",
+    "taxes",
+    "engineering",
+    "monitoring",
+    "capacity validation"
+  ],
+  "actual_commercial_api_requests": 0,
+  "actual_paid_spend_usd": 0
+}

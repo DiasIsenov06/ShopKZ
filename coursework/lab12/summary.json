@@ -1,0 +1,137 @@
+{
+  "model": "qwen2.5:0.5b",
+  "model_digest": "a8b0c51577010a279d933d14c2a8ab4b268079d44c5c8830c0a93900f1827c67",
+  "temperature": 0,
+  "seed": 42,
+  "gold_sha256": "a70cf8ec41aa7e91f9f57f23182679b2d4bdd0218ec12901d814f4f0f77e5844",
+  "hardware": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "baseline": {
+    "correct": 30,
+    "n": 30,
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "confusion": {
+      "payment": {
+        "payment": 5,
+        "delivery": 0,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "delivery": {
+        "payment": 0,
+        "delivery": 5,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "return": {
+        "payment": 0,
+        "delivery": 0,
+        "return": 5,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "account": {
+        "payment": 0,
+        "delivery": 0,
+        "return": 0,
+        "account": 5,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "product": {
+        "payment": 0,
+        "delivery": 0,
+        "return": 0,
+        "account": 0,
+        "product": 5,
+        "other": 0,
+        "INVALID": 0
+      },
+      "other": {
+        "payment": 0,
+        "delivery": 0,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 5,
+        "INVALID": 0
+      }
+    }
+  },
+  "prompt": {
+    "correct": 11,
+    "n": 30,
+    "accuracy": 0.36666666666666664,
+    "macro_f1": 0.35537918871252205,
+    "confusion": {
+      "payment": {
+        "payment": 1,
+        "delivery": 4,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "delivery": {
+        "payment": 0,
+        "delivery": 5,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "return": {
+        "payment": 0,
+        "delivery": 3,
+        "return": 2,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "account": {
+        "payment": 0,
+        "delivery": 3,
+        "return": 0,
+        "account": 2,
+        "product": 0,
+        "other": 0,
+        "INVALID": 0
+      },
+      "product": {
+        "payment": 0,
+        "delivery": 4,
+        "return": 0,
+        "account": 0,
+        "product": 1,
+        "other": 0,
+        "INVALID": 0
+      },
+      "other": {
+        "payment": 1,
+        "delivery": 3,
+        "return": 0,
+        "account": 0,
+        "product": 0,
+        "other": 0,
+        "INVALID": 1
+      }
+    }
+  },
+  "valid_json_rate": 0.9666666666666667,
+  "latency_ms_median": 5662.373520999608,
+  "latency_ms_p95": 23625.260199001787,
+  "elapsed_seconds": 270.71826624299865,
+  "go": false
+}

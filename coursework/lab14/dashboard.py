@@ -1,0 +1,20 @@
+"""Free static dashboard. Source snapshot and planning assumptions remain separate."""
+from pathlib import Path
+import json,datetime as dt,html
+P=Path(__file__).parent;ROOT=P.parents[1]
+def build():
+ issues=json.loads((ROOT/'coursework/issues.json').read_text());issues=[i for i in issues if 'pull_request' not in i]
+ runs=json.loads((ROOT/'coursework/runs.json').read_text())['workflow_runs']
+ dora=json.loads((ROOT/'project/ShopKZ_Modern_Complete/ShopKZ_GitHub/dora/data/metrics.json').read_text()) if (ROOT/'project').exists() else json.loads((ROOT/'dora/data/metrics.json').read_text())
+ portfolio=json.loads((P/'wsjf.json').read_text())
+ now=dt.datetime.now(dt.timezone.utc);cutoff=now.isoformat();open_=[i for i in issues if i['state']=='open'];closed=[i for i in issues if i['state']=='closed']
+ ages=[(now-dt.datetime.fromisoformat(i['created_at'].replace('Z','+00:00'))).days for i in open_]
+ dependencies=[{'number':i['number'],'title':i['title'],'state':i['state']} for i in issues if i['title'].startswith('[D')]
+ data={'snapshot_at':cutoff,'issues_total':len(issues),'open':len(open_),'closed':len(closed),'max_open_age_days':max(ages,default=None),'throughput_closed':len(closed),'cycle_time_days':None if not closed else sum((dt.datetime.fromisoformat(i['closed_at'].replace('Z','+00:00'))-dt.datetime.fromisoformat(i['created_at'].replace('Z','+00:00'))).total_seconds()/86400 for i in closed)/len(closed),'milestones':[{'release':'R1','planned':'2026-11-13','actual':None},{'release':'R2','planned':'2026-12-18','actual':None},{'release':'R3','planned':'2027-01-29','actual':None}],'budget':{'planned_person_hours':300,'capacity_person_hours':312,'assumed_rate_kzt':2000,'scenario_budget_kzt':600000,'actual_kzt':None},'dora':dora,'dependencies':dependencies,'runs':[{'id':r['id'],'conclusion':r['conclusion']} for r in runs]}
+ (P/'dashboard-data.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
+ rows=''.join('<tr><td>'+html.escape(str(r['rank']))+'</td><td>'+html.escape(r['initiative'])+'</td><td>'+f"{r['wsjf']:.2f}"+'</td></tr>' for r in portfolio)
+ deps=''.join('<li>#'+str(d['number'])+' '+html.escape(d['title'])+' — '+d['state']+'</li>' for d in dependencies)
+ page=f'''<!doctype html><html lang="ru"><meta charset="utf-8"><title>ShopKZ статус</title><style>body{{max-width:1100px;margin:35px auto;padding:20px;font:17px Arial;color:black;background:white}}h1{{font-size:34px}}table{{border-collapse:collapse;width:100%}}td,th{{border:1px solid black;padding:9px}}p,li{{line-height:1.5}}</style><h1>ShopKZ статус проекта</h1><p>Snapshot {cutoff}. Данные GitHub и плановые оценки разделены.</p><h2>Поток</h2><p>Всего задач {len(issues)} · открыто {len(open_)} · закрыто {len(closed)} · максимальный возраст {max(ages,default=0)} дней. Cycle time: {data['cycle_time_days'] if closed else 'N/A, нет закрытых задач'}. Открытая задача не означает отсутствие реализованного кода.</p><h2>Вехи</h2><p>R1 13.11.2026 · R2 18.12.2026 · R3 29.01.2027. Факт завершения вех не подтвержден. Milestone API пуст.</p><h2>DORA</h2><p>Зарегистрировано {dora['deployment_count']} production deployment. Частота {dora['deployments_per_day']}/день. Lead time, CFR, recovery: N/A. Отдельные CI runs не считаются deployments.</p><h2>Бюджет</h2><p>Исходный план 300 человеко-часов, capacity 312. При условной ставке 2000 ₸/ч сценарный бюджет 600000 ₸. Фактические часы и расходы не предоставлены, перерасход N/A.</p><h2>Топ риски</h2><ol><li>Нет внешнего UAT: подтверждение ценности заказчиком отсутствует.</li><li>Не зафиксирован факт релизов и стоимость работ.</li><li>Нет production наблюдений DORA и мониторинга Kuma в этой среде.</li><li>Маленькая AI модель требует проверки и gate качества.</li></ol><h2>Зависимости</h2><ul>{deps}</ul><h2>WSJF</h2><p>Авторские относительные оценки, не измеренный бизнес эффект.</p><table><tr><th>Ранг</th><th>Инициатива</th><th>WSJF</th></tr>{rows}</table></html>'''
+ (P/'dashboard.html').write_text(page)
+ print(data['issues_total'],data['open'],data['closed'])
+if __name__=='__main__':build()

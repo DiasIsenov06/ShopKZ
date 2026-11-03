@@ -1,0 +1,677 @@
+﻿2026-11-03T11:27:50.1381001Z Current runner version: '2.338.2'
+2026-11-03T11:27:50.1409952Z ##[group]Runner Image Provisioner
+2026-11-03T11:27:50.1411258Z Hosted Compute Agent
+2026-11-03T11:27:50.1411862Z Version: 20261021.618
+2026-11-03T11:27:50.1412999Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-11-03T11:27:50.1414227Z Build Date: 2026-10-21T00:45:21Z
+2026-11-03T11:27:50.1415382Z Worker ID: {a81d3634-5491-410e-bdd3-0d0504a5fedc}
+2026-11-03T11:27:50.1416796Z Region: eastus2
+2026-11-03T11:27:50.1417357Z Cloud: Azure
+2026-11-03T11:27:50.1417978Z ##[endgroup]
+2026-11-03T11:27:50.1419609Z ##[group]Operating System
+2026-11-03T11:27:50.1420667Z Ubuntu
+2026-11-03T11:27:50.1421342Z 24.04.5
+2026-11-03T11:27:50.1421877Z LTS
+2026-11-03T11:27:50.1422455Z ##[endgroup]
+2026-11-03T11:27:50.1423027Z ##[group]Runner Image
+2026-11-03T11:27:50.1423710Z Image: ubuntu-24.04
+2026-11-03T11:27:50.1424350Z Version: 20261025.353.1
+2026-11-03T11:27:50.1425701Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-03T11:27:50.1427325Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+2026-11-03T11:27:50.1428340Z ##[endgroup]
+2026-11-03T11:27:50.1429505Z ##[group]GITHUB_TOKEN Permissions
+2026-11-03T11:27:50.1431976Z Contents: read
+2026-11-03T11:27:50.1432625Z Metadata: read
+2026-11-03T11:27:50.1433239Z ##[endgroup]
+2026-11-03T11:27:50.1435532Z Secret source: Actions
+2026-11-03T11:27:50.1436563Z Cache mode: write
+2026-11-03T11:27:50.1437646Z Prepare workflow directory
+2026-11-03T11:27:50.1780712Z Prepare all required actions
+2026-11-03T11:27:50.1829519Z Getting action download info
+2026-11-03T11:27:50.4215516Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-11-03T11:27:50.5283546Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-11-03T11:27:50.6158402Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-11-03T11:27:50.8330787Z Complete job name: quality
+2026-11-03T11:27:50.9272336Z ##[group]Run actions/checkout@v4
+2026-11-03T11:27:50.9273275Z with:
+2026-11-03T11:27:50.9273743Z   repository: DiasIsenov06/ShopKZ
+2026-11-03T11:27:50.9277524Z   token: ***
+2026-11-03T11:27:50.9277974Z   ssh-strict: true
+2026-11-03T11:27:50.9278414Z   ssh-user: git
+2026-11-03T11:27:50.9278873Z   persist-credentials: true
+2026-11-03T11:27:50.9279366Z   clean: true
+2026-11-03T11:27:50.9279825Z   sparse-checkout-cone-mode: true
+2026-11-03T11:27:50.9280580Z   fetch-depth: 1
+2026-11-03T11:27:50.9281021Z   fetch-tags: false
+2026-11-03T11:27:50.9281475Z   show-progress: true
+2026-11-03T11:27:50.9281925Z   lfs: false
+2026-11-03T11:27:50.9282340Z   submodules: false
+2026-11-03T11:27:50.9282794Z   set-safe-directory: true
+2026-11-03T11:27:50.9283303Z   allow-unsafe-pr-checkout: false
+2026-11-03T11:27:50.9284098Z ##[endgroup]
+2026-11-03T11:27:51.2254934Z Syncing repository: DiasIsenov06/ShopKZ
+2026-11-03T11:27:51.2257173Z ##[group]Getting Git version info
+2026-11-03T11:27:51.2258034Z Working directory is '/home/runner/work/ShopKZ/ShopKZ'
+2026-11-03T11:27:51.2259128Z [command]/usr/bin/git version
+2026-11-03T11:27:51.2422245Z git version 2.56.0
+2026-11-03T11:27:51.2435505Z ##[endgroup]
+2026-11-03T11:27:51.2472791Z Temporarily overriding HOME='/home/runner/work/_temp/2d52f7b8-6cd2-4c55-a271-d5f8da4bfae1' before making global git config changes
+2026-11-03T11:27:51.2478442Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-03T11:27:51.2480774Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ShopKZ/ShopKZ
+2026-11-03T11:27:51.2558982Z Deleting the contents of '/home/runner/work/ShopKZ/ShopKZ'
+2026-11-03T11:27:51.2565689Z ##[group]Initializing the repository
+2026-11-03T11:27:51.2570109Z [command]/usr/bin/git init /home/runner/work/ShopKZ/ShopKZ
+2026-11-03T11:27:51.2698418Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-03T11:27:51.2701000Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-03T11:27:51.2702531Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-03T11:27:51.2703662Z hint: call:
+2026-11-03T11:27:51.2704307Z hint:
+2026-11-03T11:27:51.2705085Z hint: 	git config --global init.defaultBranch <name>
+2026-11-03T11:27:51.2706001Z hint:
+2026-11-03T11:27:51.2706863Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-03T11:27:51.2708151Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-03T11:27:51.2709270Z hint:
+2026-11-03T11:27:51.2709954Z hint: 	git branch -m <name>
+2026-11-03T11:27:51.2711086Z hint:
+2026-11-03T11:27:51.2711983Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-03T11:27:51.2718107Z Initialized empty Git repository in /home/runner/work/ShopKZ/ShopKZ/.git/
+2026-11-03T11:27:51.2735769Z [command]/usr/bin/git remote add origin https://github.com/DiasIsenov06/ShopKZ
+2026-11-03T11:27:51.2788655Z ##[endgroup]
+2026-11-03T11:27:51.2790069Z ##[group]Disabling automatic garbage collection
+2026-11-03T11:27:51.2793775Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-03T11:27:51.2843747Z ##[endgroup]
+2026-11-03T11:27:51.2846078Z ##[group]Setting up auth
+2026-11-03T11:27:51.2848512Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-03T11:27:51.2902576Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-03T11:27:51.3337943Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-03T11:27:51.3387217Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-03T11:27:51.3649484Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-03T11:27:51.3700867Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-03T11:27:51.3958853Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-03T11:27:51.4102282Z ##[endgroup]
+2026-11-03T11:27:51.4104280Z ##[group]Fetching the repository
+2026-11-03T11:27:51.4106403Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +e6c00f361d44e6ec2992e55c036d1e897f7f0632:refs/remotes/pull/28/merge
+2026-11-03T11:27:51.6773034Z From https://github.com/DiasIsenov06/ShopKZ
+2026-11-03T11:27:51.6774690Z  * [new ref]         e6c00f361d44e6ec2992e55c036d1e897f7f0632 -> pull/28/merge
+2026-11-03T11:27:51.6792304Z ##[endgroup]
+2026-11-03T11:27:51.6793490Z ##[group]Determining the checkout info
+2026-11-03T11:27:51.6794828Z ##[endgroup]
+2026-11-03T11:27:51.6798034Z [command]/usr/bin/git sparse-checkout disable
+2026-11-03T11:27:51.6864395Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-03T11:27:51.6905843Z ##[group]Checking out the ref
+2026-11-03T11:27:51.6908849Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/28/merge
+2026-11-03T11:27:51.7059012Z Note: switching to 'refs/remotes/pull/28/merge'.
+2026-11-03T11:27:51.7060002Z 
+2026-11-03T11:27:51.7061404Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-03T11:27:51.7064299Z changes and commit them, and you can discard any commits you make in this
+2026-11-03T11:27:51.7067054Z state without impacting any branches by switching back to a branch.
+2026-11-03T11:27:51.7068464Z 
+2026-11-03T11:27:51.7069163Z If you want to create a new branch to retain commits you create, you may
+2026-11-03T11:27:51.7071394Z do so (now or later) by using -c with the switch command. Example:
+2026-11-03T11:27:51.7072708Z 
+2026-11-03T11:27:51.7073137Z   git switch -c <new-branch-name>
+2026-11-03T11:27:51.7073792Z 
+2026-11-03T11:27:51.7074240Z Or undo this operation with:
+2026-11-03T11:27:51.7075006Z 
+2026-11-03T11:27:51.7075501Z   git switch -
+2026-11-03T11:27:51.7076134Z 
+2026-11-03T11:27:51.7077124Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-03T11:27:51.7078462Z 
+2026-11-03T11:27:51.7079965Z HEAD is now at e6c00f3 Merge eaef5d5d47a8f383ecb36667449396d1cab46252 into d33b50e2ad64c1c6dd90380f5647349755ff8031
+2026-11-03T11:27:51.7085148Z ##[endgroup]
+2026-11-03T11:27:51.7127489Z [command]/usr/bin/git log -1 --format=%H
+2026-11-03T11:27:51.7163735Z e6c00f361d44e6ec2992e55c036d1e897f7f0632
+2026-11-03T11:27:51.7596899Z ##[group]Run actions/setup-node@v4
+2026-11-03T11:27:51.7598141Z with:
+2026-11-03T11:27:51.7599038Z   node-version: 24
+2026-11-03T11:27:51.7599993Z   cache: npm
+2026-11-03T11:27:51.7601107Z   always-auth: false
+2026-11-03T11:27:51.7602131Z   check-latest: false
+2026-11-03T11:27:51.7612290Z   token: ***
+2026-11-03T11:27:51.7613208Z ##[endgroup]
+2026-11-03T11:27:51.9330864Z Found in cache @ /opt/hostedtoolcache/node/24.22.1/x64
+2026-11-03T11:27:51.9334738Z ##[group]Environment details
+2026-11-03T11:27:51.9343895Z (node:2355) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-03T11:27:51.9347726Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-03T11:27:52.4088967Z node: v24.22.1
+2026-11-03T11:27:52.4091284Z npm: 11.19.1
+2026-11-03T11:27:52.4092877Z yarn: 1.22.22
+2026-11-03T11:27:52.4096121Z ##[endgroup]
+2026-11-03T11:27:52.4115714Z [command]/opt/hostedtoolcache/node/24.22.1/x64/bin/npm config get cache
+2026-11-03T11:27:52.5281412Z /home/runner/.npm
+2026-11-03T11:27:52.6277097Z npm cache is not found
+2026-11-03T11:27:52.6507681Z ##[group]Run npm ci
+2026-11-03T11:27:52.6508730Z [36;1mnpm ci[0m
+2026-11-03T11:27:52.6541599Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:27:52.6542697Z ##[endgroup]
+2026-11-03T11:27:55.3683055Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-11-03T11:27:55.4389500Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-11-03T11:27:55.5021503Z npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+2026-11-03T11:27:58.6608953Z 
+2026-11-03T11:27:58.6610456Z added 470 packages, and audited 471 packages in 6s
+2026-11-03T11:27:58.6611286Z 
+2026-11-03T11:27:58.6611959Z 77 packages are looking for funding
+2026-11-03T11:27:58.6612656Z   run `npm fund` for details
+2026-11-03T11:27:58.6948998Z 
+2026-11-03T11:27:58.6950426Z 25 vulnerabilities (4 low, 21 moderate)
+2026-11-03T11:27:58.6951050Z 
+2026-11-03T11:27:58.6951687Z To address issues that do not require attention, run:
+2026-11-03T11:27:58.6952518Z   npm audit fix
+2026-11-03T11:27:58.6952842Z 
+2026-11-03T11:27:58.6953328Z To address all issues (including breaking changes), run:
+2026-11-03T11:27:58.6954106Z   npm audit fix --force
+2026-11-03T11:27:58.6954435Z 
+2026-11-03T11:27:58.6954716Z Run `npm audit` for details.
+2026-11-03T11:27:58.6966636Z npm warn install-scripts 1 package has install scripts not yet covered by allowScripts:
+2026-11-03T11:27:58.6968197Z npm warn install-scripts   better-sqlite3@12.11.1 (install: prebuild-install || node-gyp rebuild --release)
+2026-11-03T11:27:58.6969255Z npm warn install-scripts
+2026-11-03T11:27:58.6970793Z npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+2026-11-03T11:27:58.7635881Z ##[group]Run npm run lint
+2026-11-03T11:27:58.7637055Z [36;1mnpm run lint[0m
+2026-11-03T11:27:58.7661336Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:27:58.7661617Z ##[endgroup]
+2026-11-03T11:27:58.8708727Z 
+2026-11-03T11:27:58.8709352Z > shopkz@1.0.0 lint
+2026-11-03T11:27:58.8709813Z > eslint .
+2026-11-03T11:27:58.8710064Z 
+2026-11-03T11:27:59.5000669Z ##[group]Run npm run check
+2026-11-03T11:27:59.5001043Z [36;1mnpm run check[0m
+2026-11-03T11:27:59.5021783Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:27:59.5022049Z ##[endgroup]
+2026-11-03T11:27:59.6055547Z 
+2026-11-03T11:27:59.6055941Z > shopkz@1.0.0 check
+2026-11-03T11:27:59.6057393Z > node --check public/app.js && node --check public/enhancements.js && node --check public/init.js && node --check public/theme.js && node --check server.js && node --check db.js
+2026-11-03T11:27:59.6058283Z 
+2026-11-03T11:27:59.7769864Z ##[group]Run npm run test:coverage
+2026-11-03T11:27:59.7770752Z [36;1mnpm run test:coverage[0m
+2026-11-03T11:27:59.7791339Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:27:59.7791634Z ##[endgroup]
+2026-11-03T11:27:59.8879017Z 
+2026-11-03T11:27:59.8879807Z > shopkz@1.0.0 test:coverage
+2026-11-03T11:27:59.8880811Z > jest --coverage --runInBand
+2026-11-03T11:27:59.8881161Z 
+2026-11-03T11:28:02.2988118Z PASS tests/integration/api.test.js
+2026-11-03T11:28:02.3176994Z   ● Console
+2026-11-03T11:28:02.3177242Z 
+2026-11-03T11:28:02.3177415Z     console.error
+2026-11-03T11:28:02.3177879Z       ◇ injected env (0) from .env
+2026-11-03T11:28:02.3178078Z 
+2026-11-03T11:28:02.3178574Z     [0m [90m 2 |[39m [90m// Запуск: npm install && npm start   →  http://localhost:3000[39m
+2026-11-03T11:28:02.3179045Z      [90m 3 |[39m
+2026-11-03T11:28:02.3180085Z     [31m[1m>[22m[39m[90m 4 |[39m require([32m'dotenv'[39m)[33m.[39mconfig()[33m;[39m [90m// подхватывает .env, если он есть (см. .env.example)[39m
+2026-11-03T11:28:02.3181204Z      [90m   |[39m                   [31m[1m^[22m[39m
+2026-11-03T11:28:02.3181543Z      [90m 5 |[39m
+2026-11-03T11:28:02.3182020Z      [90m 6 |[39m [36mconst[39m express [33m=[39m require([32m'express'[39m)[33m;[39m
+2026-11-03T11:28:02.3182818Z      [90m 7 |[39m [36mconst[39m session [33m=[39m require([32m'express-session'[39m)[33m;[39m[0m
+2026-11-03T11:28:02.3183175Z 
+2026-11-03T11:28:02.3183359Z       at z (node_modules/dotenv/dist/index.cjs:7:300)
+2026-11-03T11:28:02.3183839Z       at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+2026-11-03T11:28:02.3184370Z       at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+2026-11-03T11:28:02.3184789Z       at Object.config (server.js:4:19)
+2026-11-03T11:28:02.3185169Z       at Object.require (tests/integration/api.test.js:16:9)
+2026-11-03T11:28:02.3185412Z 
+2026-11-03T11:28:02.3185512Z     console.log
+2026-11-03T11:28:02.3185800Z       [seed] Добавлено товаров: 12
+2026-11-03T11:28:02.3185970Z 
+2026-11-03T11:28:02.3186097Z       at Object.log (db.js:99:11)
+2026-11-03T11:28:02.3186274Z 
+2026-11-03T11:28:02.3186366Z     console.log
+2026-11-03T11:28:02.3186869Z       [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+2026-11-03T11:28:02.3187199Z 
+2026-11-03T11:28:02.3187330Z       at Object.log (db.js:107:11)
+2026-11-03T11:28:02.3187504Z 
+2026-11-03T11:28:02.3187589Z     console.log
+2026-11-03T11:28:02.3187906Z       [seed] Добавлены промокоды: SALE10, WELCOME15
+2026-11-03T11:28:02.3188119Z 
+2026-11-03T11:28:02.3188244Z       at Object.log (db.js:114:11)
+2026-11-03T11:28:02.3188408Z 
+2026-11-03T11:28:03.0218603Z PASS tests/acceptance/acceptance.test.js
+2026-11-03T11:28:03.0340715Z   ● Console
+2026-11-03T11:28:03.0341169Z 
+2026-11-03T11:28:03.0344669Z     console.error
+2026-11-03T11:28:03.0345499Z       ◇ injected env (0) from .env
+2026-11-03T11:28:03.0345833Z 
+2026-11-03T11:28:03.0346558Z     [0m [90m 2 |[39m [90m// Запуск: npm install && npm start   →  http://localhost:3000[39m
+2026-11-03T11:28:03.0347304Z      [90m 3 |[39m
+2026-11-03T11:28:03.0348554Z     [31m[1m>[22m[39m[90m 4 |[39m require([32m'dotenv'[39m)[33m.[39mconfig()[33m;[39m [90m// подхватывает .env, если он есть (см. .env.example)[39m
+2026-11-03T11:28:03.0349856Z      [90m   |[39m                   [31m[1m^[22m[39m
+2026-11-03T11:28:03.0350602Z      [90m 5 |[39m
+2026-11-03T11:28:03.0351435Z      [90m 6 |[39m [36mconst[39m express [33m=[39m require([32m'express'[39m)[33m;[39m
+2026-11-03T11:28:03.0352169Z      [90m 7 |[39m [36mconst[39m session [33m=[39m require([32m'express-session'[39m)[33m;[39m[0m
+2026-11-03T11:28:03.0352536Z 
+2026-11-03T11:28:03.0352712Z       at z (node_modules/dotenv/dist/index.cjs:7:300)
+2026-11-03T11:28:03.0353193Z       at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+2026-11-03T11:28:03.0354018Z       at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+2026-11-03T11:28:03.0354452Z       at Object.config (server.js:4:19)
+2026-11-03T11:28:03.0354845Z       at Object.require (tests/acceptance/acceptance.test.js:16:9)
+2026-11-03T11:28:03.0355117Z 
+2026-11-03T11:28:03.0355212Z     console.log
+2026-11-03T11:28:03.0355501Z       [seed] Добавлено товаров: 12
+2026-11-03T11:28:03.0355672Z 
+2026-11-03T11:28:03.0355792Z       at Object.log (db.js:99:11)
+2026-11-03T11:28:03.0355972Z 
+2026-11-03T11:28:03.0356084Z     console.log
+2026-11-03T11:28:03.0356563Z       [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+2026-11-03T11:28:03.0356891Z 
+2026-11-03T11:28:03.0357039Z       at Object.log (db.js:107:11)
+2026-11-03T11:28:03.0357218Z 
+2026-11-03T11:28:03.0357305Z     console.log
+2026-11-03T11:28:03.0357624Z       [seed] Добавлены промокоды: SALE10, WELCOME15
+2026-11-03T11:28:03.0357830Z 
+2026-11-03T11:28:03.0357953Z       at Object.log (db.js:114:11)
+2026-11-03T11:28:03.0358116Z 
+2026-11-03T11:28:03.0995405Z PASS tests/unit/utils.test.js
+2026-11-03T11:28:05.7402689Z PASS tests/practical5/checkout.test.js
+2026-11-03T11:28:05.7476943Z   ● Console
+2026-11-03T11:28:05.7477182Z 
+2026-11-03T11:28:05.7477381Z     console.error
+2026-11-03T11:28:05.7478009Z       ◇ injected env (0) from .env
+2026-11-03T11:28:05.7478294Z 
+2026-11-03T11:28:05.7478928Z     [0m [90m 2 |[39m [90m// Запуск: npm install && npm start   →  http://localhost:3000[39m
+2026-11-03T11:28:05.7479665Z      [90m 3 |[39m
+2026-11-03T11:28:05.7481136Z     [31m[1m>[22m[39m[90m 4 |[39m require([32m'dotenv'[39m)[33m.[39mconfig()[33m;[39m [90m// подхватывает .env, если он есть (см. .env.example)[39m
+2026-11-03T11:28:05.7482325Z      [90m   |[39m                   [31m[1m^[22m[39m
+2026-11-03T11:28:05.7482853Z      [90m 5 |[39m
+2026-11-03T11:28:05.7483680Z      [90m 6 |[39m [36mconst[39m express [33m=[39m require([32m'express'[39m)[33m;[39m
+2026-11-03T11:28:05.7484949Z      [90m 7 |[39m [36mconst[39m session [33m=[39m require([32m'express-session'[39m)[33m;[39m[0m
+2026-11-03T11:28:05.7485569Z 
+2026-11-03T11:28:05.7485856Z       at z (node_modules/dotenv/dist/index.cjs:7:300)
+2026-11-03T11:28:05.7486679Z       at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+2026-11-03T11:28:05.7487590Z       at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+2026-11-03T11:28:05.7488286Z       at Object.config (server.js:4:19)
+2026-11-03T11:28:05.7488938Z       at Object.require (tests/practical5/checkout.test.js:16:55)
+2026-11-03T11:28:05.7489365Z 
+2026-11-03T11:28:05.7489505Z     console.log
+2026-11-03T11:28:05.7489991Z       [seed] Добавлено товаров: 12
+2026-11-03T11:28:05.7490565Z 
+2026-11-03T11:28:05.7490783Z       at Object.log (db.js:99:11)
+2026-11-03T11:28:05.7491058Z 
+2026-11-03T11:28:05.7491207Z     console.log
+2026-11-03T11:28:05.7491986Z       [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+2026-11-03T11:28:05.7492492Z 
+2026-11-03T11:28:05.7492706Z       at Object.log (db.js:107:11)
+2026-11-03T11:28:05.7492963Z 
+2026-11-03T11:28:05.7493099Z     console.log
+2026-11-03T11:28:05.7493588Z       [seed] Добавлены промокоды: SALE10, WELCOME15
+2026-11-03T11:28:05.7494401Z 
+2026-11-03T11:28:05.7494610Z       at Object.log (db.js:114:11)
+2026-11-03T11:28:05.7494904Z 
+2026-11-03T11:28:05.8101550Z PASS tests/unit/storefront.test.js
+2026-11-03T11:28:06.2335615Z PASS tests/integration/defects.test.js
+2026-11-03T11:28:06.2421408Z   ● Console
+2026-11-03T11:28:06.2421739Z 
+2026-11-03T11:28:06.2421920Z     console.error
+2026-11-03T11:28:06.2422500Z       ◇ injected env (0) from .env
+2026-11-03T11:28:06.2422828Z 
+2026-11-03T11:28:06.2423518Z     [0m [90m 2 |[39m [90m// Запуск: npm install && npm start   →  http://localhost:3000[39m
+2026-11-03T11:28:06.2424288Z      [90m 3 |[39m
+2026-11-03T11:28:06.2425618Z     [31m[1m>[22m[39m[90m 4 |[39m require([32m'dotenv'[39m)[33m.[39mconfig()[33m;[39m [90m// подхватывает .env, если он есть (см. .env.example)[39m
+2026-11-03T11:28:06.2426367Z      [90m   |[39m                   [31m[1m^[22m[39m
+2026-11-03T11:28:06.2426700Z      [90m 5 |[39m
+2026-11-03T11:28:06.2427172Z      [90m 6 |[39m [36mconst[39m express [33m=[39m require([32m'express'[39m)[33m;[39m
+2026-11-03T11:28:06.2427897Z      [90m 7 |[39m [36mconst[39m session [33m=[39m require([32m'express-session'[39m)[33m;[39m[0m
+2026-11-03T11:28:06.2428260Z 
+2026-11-03T11:28:06.2428435Z       at z (node_modules/dotenv/dist/index.cjs:7:300)
+2026-11-03T11:28:06.2428910Z       at Object.ee [as configDotenv] (node_modules/dotenv/dist/index.cjs:7:1145)
+2026-11-03T11:28:06.2429424Z       at Object.te [as config] (node_modules/dotenv/dist/index.cjs:7:1253)
+2026-11-03T11:28:06.2429830Z       at Object.config (server.js:4:19)
+2026-11-03T11:28:06.2430590Z       at Object.require (tests/integration/defects.test.js:14:9)
+2026-11-03T11:28:06.2431074Z 
+2026-11-03T11:28:06.2431250Z     console.log
+2026-11-03T11:28:06.2431813Z       [seed] Добавлено товаров: 12
+2026-11-03T11:28:06.2432134Z 
+2026-11-03T11:28:06.2432354Z       at Object.log (db.js:99:11)
+2026-11-03T11:28:06.2432663Z 
+2026-11-03T11:28:06.2432815Z     console.log
+2026-11-03T11:28:06.2433721Z       [seed] Созданы тестовые пользователи: admin@shopkz.kz / admin123, test@shopkz.kz / test1234
+2026-11-03T11:28:06.2434303Z 
+2026-11-03T11:28:06.2434551Z       at Object.log (db.js:107:11)
+2026-11-03T11:28:06.2434865Z 
+2026-11-03T11:28:06.2435033Z     console.log
+2026-11-03T11:28:06.2435647Z       [seed] Добавлены промокоды: SALE10, WELCOME15
+2026-11-03T11:28:06.2436029Z 
+2026-11-03T11:28:06.2436244Z       at Object.log (db.js:114:11)
+2026-11-03T11:28:06.2436571Z 
+2026-11-03T11:28:06.2568980Z -----------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-03T11:28:06.2574847Z File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                                                                         
+2026-11-03T11:28:06.2576138Z -----------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-03T11:28:06.2577543Z All files  |   62.96 |    52.21 |   56.45 |   68.52 |                                                                                                                                           
+2026-11-03T11:28:06.2579319Z  server.js |   59.32 |    48.05 |      50 |   65.94 | 87-94,109-112,131-139,143-144,149-151,155-161,167-170,242-245,269-272,276-281,300,304-313,317-322,333-336,340-341,347-352,356-359,365-366 
+2026-11-03T11:28:06.2580874Z  utils.js  |     100 |       95 |     100 |     100 | 10                                                                                                                                        
+2026-11-03T11:28:06.2581924Z -----------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------------
+2026-11-03T11:28:06.2716211Z 
+2026-11-03T11:28:06.2725059Z Test Suites: 6 passed, 6 total
+2026-11-03T11:28:06.2725646Z Tests:       77 passed, 77 total
+2026-11-03T11:28:06.2726148Z Snapshots:   0 total
+2026-11-03T11:28:06.2726622Z Time:        6.057 s
+2026-11-03T11:28:06.2727042Z Ran all test suites.
+2026-11-03T11:28:06.3769559Z ##[group]Run npm run test:system
+2026-11-03T11:28:06.3770111Z [36;1mnpm run test:system[0m
+2026-11-03T11:28:06.3791525Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:28:06.3791790Z ##[endgroup]
+2026-11-03T11:28:06.4835553Z 
+2026-11-03T11:28:06.4836194Z > shopkz@1.0.0 test:system
+2026-11-03T11:28:06.4836639Z > node tests/system/system.test.js
+2026-11-03T11:28:06.4836868Z 
+2026-11-03T11:28:06.5156737Z 
+2026-11-03T11:28:06.5157954Z === SYSTEM TEST: ShopKZ (реальный сервер, порт 4310) ===
+2026-11-03T11:28:06.5158384Z 
+2026-11-03T11:28:06.8965719Z   ✓ ST-01: Главная HTML-страница отдаётся (GET /)
+2026-11-03T11:28:06.9021183Z   ✓ ST-02: Каталог содержит начальные товары  (получено: 12)
+2026-11-03T11:28:07.0148152Z   ✓ ST-03: Регистрация нового пользователя
+2026-11-03T11:28:07.0189344Z   ✓ ST-04: Фильтр по категории + сортировка по цене работают
+2026-11-03T11:28:07.0314870Z   ✓ ST-05: Полный сценарий покупки (корзина → промокод → заказ) завершается успешно
+2026-11-03T11:28:07.0351471Z   ✓ ST-06: Оформленный заказ появляется в «Мои заказы»
+2026-11-03T11:28:07.1220681Z   ✓ ST-07: Админ видит заказ клиента и меняет статус на "shipped"
+2026-11-03T11:28:07.2050953Z   ✓ ST-08: Отправленный заказ нельзя отменить клиенту (регресс-проверка фикса D-01)
+2026-11-03T11:28:07.2051722Z 
+2026-11-03T11:28:07.2052285Z --- ИТОГО (System Test): 8 passed, 0 failed из 8 ---
+2026-11-03T11:28:07.2052798Z 
+2026-11-03T11:28:07.2250069Z ##[group]Run npx playwright install --with-deps chromium
+2026-11-03T11:28:07.2250872Z [36;1mnpx playwright install --with-deps chromium[0m
+2026-11-03T11:28:07.2271892Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:28:07.2272151Z ##[endgroup]
+2026-11-03T11:28:08.0075627Z Installing dependencies...
+2026-11-03T11:28:08.0170780Z Switching to root user to install dependencies...
+2026-11-03T11:28:08.1151993Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-03T11:28:08.1543836Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-11-03T11:28:08.1562445Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-11-03T11:28:08.1571646Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-11-03T11:28:08.1595777Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-11-03T11:28:08.1619977Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-11-03T11:28:08.2909368Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [617 kB]
+2026-11-03T11:28:08.3062269Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [685 kB]
+2026-11-03T11:28:08.3457865Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1408 kB]
+2026-11-03T11:28:08.3527500Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [311 kB]
+2026-11-03T11:28:08.3551340Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1707 kB]
+2026-11-03T11:28:08.3636503Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [343 kB]
+2026-11-03T11:28:08.3683879Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1813 kB]
+2026-11-03T11:28:08.3815980Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [412 kB]
+2026-11-03T11:28:08.3817566Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [14.3 kB]
+2026-11-03T11:28:08.4628160Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1153 kB]
+2026-11-03T11:28:08.4683252Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [232 kB]
+2026-11-03T11:28:08.4702460Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1224 kB]
+2026-11-03T11:28:08.5199403Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [246 kB]
+2026-11-03T11:28:08.5222568Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1721 kB]
+2026-11-03T11:28:08.5296251Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [394 kB]
+2026-11-03T11:28:08.5323912Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [12.4 kB]
+2026-11-03T11:28:11.8664137Z Fetched 12.7 MB in 1s (9859 kB/s)
+2026-11-03T11:28:13.0213101Z Reading package lists...
+2026-11-03T11:28:13.0533474Z Reading package lists...
+2026-11-03T11:28:13.3075990Z Building dependency tree...
+2026-11-03T11:28:13.3083819Z Reading state information...
+2026-11-03T11:28:13.4844752Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-11-03T11:28:13.4845711Z libasound2t64 set to manually installed.
+2026-11-03T11:28:13.4847170Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-03T11:28:13.4847788Z libatk-bridge2.0-0t64 set to manually installed.
+2026-11-03T11:28:13.4848361Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-03T11:28:13.4848875Z libatk1.0-0t64 set to manually installed.
+2026-11-03T11:28:13.4849561Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-11-03T11:28:13.4850110Z libatspi2.0-0t64 set to manually installed.
+2026-11-03T11:28:13.4851033Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-11-03T11:28:13.4851534Z libcairo2 set to manually installed.
+2026-11-03T11:28:13.4852540Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-11-03T11:28:13.4853084Z libcups2t64 set to manually installed.
+2026-11-03T11:28:13.4853621Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-11-03T11:28:13.4854149Z libdbus-1-3 set to manually installed.
+2026-11-03T11:28:13.4854698Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-11-03T11:28:13.4855223Z libdrm2 set to manually installed.
+2026-11-03T11:28:13.4855743Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.4).
+2026-11-03T11:28:13.4856247Z libgbm1 set to manually installed.
+2026-11-03T11:28:13.4856810Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.10).
+2026-11-03T11:28:13.4857366Z libglib2.0-0t64 set to manually installed.
+2026-11-03T11:28:13.4857906Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-11-03T11:28:13.4858404Z libnspr4 set to manually installed.
+2026-11-03T11:28:13.4858925Z libnss3 is already the newest version (2:3.98-1ubuntu0.3).
+2026-11-03T11:28:13.4859415Z libnss3 set to manually installed.
+2026-11-03T11:28:13.4859954Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-11-03T11:28:13.4860643Z libpango-1.0-0 set to manually installed.
+2026-11-03T11:28:13.4861172Z libx11-6 is already the newest version (2:1.8.7-1ubuntu0.1).
+2026-11-03T11:28:13.4861669Z libx11-6 set to manually installed.
+2026-11-03T11:28:13.4862132Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-11-03T11:28:13.4862598Z libxcb1 set to manually installed.
+2026-11-03T11:28:13.4863030Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-11-03T11:28:13.4863457Z libxcomposite1 set to manually installed.
+2026-11-03T11:28:13.4863877Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-11-03T11:28:13.4864264Z libxdamage1 set to manually installed.
+2026-11-03T11:28:13.4864650Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-11-03T11:28:13.4865012Z libxext6 set to manually installed.
+2026-11-03T11:28:13.4865404Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-11-03T11:28:13.4865780Z libxfixes3 set to manually installed.
+2026-11-03T11:28:13.4866174Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-11-03T11:28:13.4866565Z libxkbcommon0 set to manually installed.
+2026-11-03T11:28:13.4867130Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-11-03T11:28:13.4867510Z libxrandr2 set to manually installed.
+2026-11-03T11:28:13.4867893Z xvfb is already the newest version (2:21.1.12-1ubuntu1.9).
+2026-11-03T11:28:13.4868424Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-11-03T11:28:13.4868985Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-11-03T11:28:13.4869405Z libfontconfig1 set to manually installed.
+2026-11-03T11:28:13.4869843Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.2).
+2026-11-03T11:28:13.4870444Z libfreetype6 set to manually installed.
+2026-11-03T11:28:13.4870868Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-11-03T11:28:13.4871276Z fonts-liberation set to manually installed.
+2026-11-03T11:28:13.4871673Z The following additional packages will be installed:
+2026-11-03T11:28:13.4872027Z   xfonts-encodings xfonts-utils
+2026-11-03T11:28:13.4872296Z Recommended packages:
+2026-11-03T11:28:13.4872584Z   fonts-ipafont-mincho fonts-tlwg-loma
+2026-11-03T11:28:13.5082928Z The following NEW packages will be installed:
+2026-11-03T11:28:13.5083590Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-11-03T11:28:13.5096147Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+2026-11-03T11:28:13.5096670Z   xfonts-utils
+2026-11-03T11:28:13.5321366Z 0 upgraded, 9 newly installed, 0 to remove and 6 not upgraded.
+2026-11-03T11:28:13.5322233Z Need to get 21.1 MB of archives.
+2026-11-03T11:28:13.5323038Z After this operation, 79.5 MB of additional disk space will be used.
+2026-11-03T11:28:13.5324495Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-11-03T11:28:13.5708983Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-11-03T11:28:13.6437646Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-11-03T11:28:13.7677000Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-11-03T11:28:13.7886282Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-11-03T11:28:13.8392579Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-11-03T11:28:13.9193512Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-11-03T11:28:13.9455208Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-11-03T11:28:13.9660023Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-11-03T11:28:13.9915039Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-11-03T11:28:14.2761142Z Fetched 21.1 MB in 0s (44.4 MB/s)
+2026-11-03T11:28:14.3014552Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-11-03T11:28:14.3304714Z (Reading database ... 
+2026-11-03T11:28:14.3305333Z (Reading database ... 5%
+2026-11-03T11:28:14.3305858Z (Reading database ... 10%
+2026-11-03T11:28:14.3306249Z (Reading database ... 15%
+2026-11-03T11:28:14.3306648Z (Reading database ... 20%
+2026-11-03T11:28:14.3307010Z (Reading database ... 25%
+2026-11-03T11:28:14.3307331Z (Reading database ... 30%
+2026-11-03T11:28:14.3307646Z (Reading database ... 35%
+2026-11-03T11:28:14.3307964Z (Reading database ... 40%
+2026-11-03T11:28:14.3308280Z (Reading database ... 45%
+2026-11-03T11:28:14.3308589Z (Reading database ... 50%
+2026-11-03T11:28:14.3351943Z (Reading database ... 55%
+2026-11-03T11:28:14.4692195Z (Reading database ... 60%
+2026-11-03T11:28:14.6712279Z (Reading database ... 65%
+2026-11-03T11:28:14.8623916Z (Reading database ... 70%
+2026-11-03T11:28:15.0707921Z (Reading database ... 75%
+2026-11-03T11:28:15.1701254Z (Reading database ... 80%
+2026-11-03T11:28:15.2835024Z (Reading database ... 85%
+2026-11-03T11:28:15.3773292Z (Reading database ... 90%
+2026-11-03T11:28:15.5231802Z (Reading database ... 95%
+2026-11-03T11:28:15.5232219Z (Reading database ... 100%
+2026-11-03T11:28:15.5232758Z (Reading database ... 215504 files and directories currently installed.)
+2026-11-03T11:28:15.5279756Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-11-03T11:28:15.5387023Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-03T11:28:15.7876632Z Selecting previously unselected package fonts-freefont-ttf.
+2026-11-03T11:28:15.8027028Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-11-03T11:28:15.8036028Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-03T11:28:15.8983534Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-11-03T11:28:15.9131033Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-11-03T11:28:15.9140054Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-03T11:28:15.9393882Z Selecting previously unselected package fonts-unifont.
+2026-11-03T11:28:15.9542380Z Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-11-03T11:28:15.9550735Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-11-03T11:28:16.0690456Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-11-03T11:28:16.0840827Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-11-03T11:28:16.0968516Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-03T11:28:16.5961181Z Selecting previously unselected package xfonts-encodings.
+2026-11-03T11:28:16.6106886Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-11-03T11:28:16.6115247Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-03T11:28:16.6456623Z Selecting previously unselected package xfonts-utils.
+2026-11-03T11:28:16.6611564Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-11-03T11:28:16.6622801Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-11-03T11:28:16.7051531Z Selecting previously unselected package xfonts-cyrillic.
+2026-11-03T11:28:16.7200839Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-11-03T11:28:16.7211957Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-03T11:28:16.7666430Z Selecting previously unselected package xfonts-scalable.
+2026-11-03T11:28:16.7817386Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-11-03T11:28:16.7830107Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-03T11:28:16.8332725Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-11-03T11:28:16.8487007Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-11-03T11:28:16.8508143Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-11-03T11:28:16.8532274Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-11-03T11:28:16.8553411Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-11-03T11:28:16.8629419Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-11-03T11:28:16.8647793Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-11-03T11:28:16.8668664Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-11-03T11:28:16.8753214Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-11-03T11:28:16.9078102Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-11-03T11:28:16.9394002Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-11-03T11:28:16.9420786Z Not building database; man-db/auto-update is not 'true'.
+2026-11-03T11:28:16.9436481Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-11-03T11:28:17.7451503Z 
+2026-11-03T11:28:17.7452177Z Running kernel seems to be up-to-date.
+2026-11-03T11:28:17.7452566Z 
+2026-11-03T11:28:17.7452766Z No services need to be restarted.
+2026-11-03T11:28:17.7452998Z 
+2026-11-03T11:28:17.7461521Z No containers need to be restarted.
+2026-11-03T11:28:17.7461906Z 
+2026-11-03T11:28:17.7462230Z No user sessions are running outdated binaries.
+2026-11-03T11:28:18.9327781Z 
+2026-11-03T11:28:18.9328797Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-11-03T11:28:18.9330923Z Downloading Chrome for Testing 153.0.8010.12 (playwright chromium v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-linux64.zip
+2026-11-03T11:28:19.3447130Z |                                                                                |   0% of 186.8 MiB
+2026-11-03T11:28:19.5731843Z |■■■■■■■■                                                                        |  10% of 186.8 MiB
+2026-11-03T11:28:19.7132242Z |■■■■■■■■■■■■■■■■                                                                |  20% of 186.8 MiB
+2026-11-03T11:28:19.8293450Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 186.8 MiB
+2026-11-03T11:28:19.9243476Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 186.8 MiB
+2026-11-03T11:28:20.0109036Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 186.8 MiB
+2026-11-03T11:28:20.0921038Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 186.8 MiB
+2026-11-03T11:28:20.1578679Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 186.8 MiB
+2026-11-03T11:28:20.2477109Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 186.8 MiB
+2026-11-03T11:28:20.3506693Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 186.8 MiB
+2026-11-03T11:28:20.4332904Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 186.8 MiB
+2026-11-03T11:28:23.5461188Z Chrome for Testing 153.0.8010.12 (playwright chromium v1243) downloaded to /home/runner/.cache/ms-playwright/chromium-1243
+2026-11-03T11:28:23.5466986Z Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+2026-11-03T11:28:23.9432929Z |                                                                                |   0% of 2.3 MiB
+2026-11-03T11:28:23.9544556Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+2026-11-03T11:28:23.9596389Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+2026-11-03T11:28:23.9639165Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+2026-11-03T11:28:23.9659219Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+2026-11-03T11:28:23.9687497Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+2026-11-03T11:28:23.9702790Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+2026-11-03T11:28:23.9726793Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+2026-11-03T11:28:23.9741572Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+2026-11-03T11:28:23.9762829Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+2026-11-03T11:28:23.9772222Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+2026-11-03T11:28:24.0406430Z FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+2026-11-03T11:28:24.0410780Z Downloading Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip
+2026-11-03T11:28:24.4571728Z |                                                                                |   0% of 114.3 MiB
+2026-11-03T11:28:24.5572243Z |■■■■■■■■                                                                        |  10% of 114.3 MiB
+2026-11-03T11:28:24.6284678Z |■■■■■■■■■■■■■■■■                                                                |  20% of 114.3 MiB
+2026-11-03T11:28:24.6885564Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.3 MiB
+2026-11-03T11:28:24.7671663Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.3 MiB
+2026-11-03T11:28:24.8161572Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.3 MiB
+2026-11-03T11:28:24.8615449Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.3 MiB
+2026-11-03T11:28:24.9207060Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.3 MiB
+2026-11-03T11:28:24.9624625Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.3 MiB
+2026-11-03T11:28:25.0016917Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.3 MiB
+2026-11-03T11:28:25.0571895Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.3 MiB
+2026-11-03T11:28:27.2680630Z Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1243
+2026-11-03T11:28:27.3060620Z ##[group]Run npm run test:e2e
+2026-11-03T11:28:27.3060959Z [36;1mnpm run test:e2e[0m
+2026-11-03T11:28:27.3081028Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:28:27.3081402Z ##[endgroup]
+2026-11-03T11:28:27.4095366Z 
+2026-11-03T11:28:27.4095971Z > shopkz@1.0.0 test:e2e
+2026-11-03T11:28:27.4096493Z > playwright test tests/e2e
+2026-11-03T11:28:27.4096705Z 
+2026-11-03T11:28:28.2895321Z [WebServer] ◇ injected env (0) from .env
+2026-11-03T11:28:28.6684332Z 
+2026-11-03T11:28:28.6685095Z Running 9 tests using 2 workers
+2026-11-03T11:28:28.6685489Z 
+2026-11-03T11:28:30.2130984Z   ✓  1 tests/e2e/storefront.spec.js:3:2 › responsive catalog 360px (660ms)
+2026-11-03T11:28:30.6978072Z   ✓  3 tests/e2e/storefront.spec.js:3:2 › responsive catalog 390px (463ms)
+2026-11-03T11:28:31.2855742Z   ✓  4 tests/e2e/storefront.spec.js:3:2 › responsive catalog 768px (568ms)
+2026-11-03T11:28:31.5882539Z   ✓  2 tests/e2e/checkout.spec.js:17:1 › E2E-01: полный путь покупателя — от каталога до подтверждения заказа (2.0s)
+2026-11-03T11:28:31.8253506Z   ✓  5 tests/e2e/storefront.spec.js:3:2 › responsive catalog 1024px (524ms)
+2026-11-03T11:28:32.4156993Z   ✓  7 tests/e2e/storefront.spec.js:3:2 › responsive catalog 1440px (569ms)
+2026-11-03T11:28:33.1801399Z   ✓  6 tests/e2e/checkout.spec.js:60:1 › E2E-02: платёж тестовой картой-отказом показывает пользователю ошибку (1.6s)
+2026-11-03T11:28:33.4896843Z   ✓  8 tests/e2e/storefront.spec.js:9:1 › guest preferences and shopping state survive reload (1.1s)
+2026-11-03T11:28:34.1977417Z   ✓  9 tests/e2e/storefront.spec.js:20:1 › mobile filter dialog applies price and availability and closes on Escape (692ms)
+2026-11-03T11:28:34.2618400Z 
+2026-11-03T11:28:34.2624218Z   9 passed (6.3s)
+2026-11-03T11:28:34.2909239Z ##[group]Run python3 -m unittest discover -s dora -p 'test_*.py' -v
+2026-11-03T11:28:34.2909747Z [36;1mpython3 -m unittest discover -s dora -p 'test_*.py' -v[0m
+2026-11-03T11:28:34.2929771Z shell: /usr/bin/bash -e {0}
+2026-11-03T11:28:34.2930026Z ##[endgroup]
+2026-11-03T11:28:34.3708536Z test_all_pages_followed (test_metrics.MetricsTests.test_all_pages_followed) ... ok
+2026-11-03T11:28:34.3751016Z test_failed_ci_is_not_a_deployment (test_metrics.MetricsTests.test_failed_ci_is_not_a_deployment) ... ok
+2026-11-03T11:28:34.3752831Z test_incomplete_incident_register_does_not_mean_zero_failures (test_metrics.MetricsTests.test_incomplete_incident_register_does_not_mean_zero_failures) ... ok
+2026-11-03T11:28:34.3754344Z test_negative_recovery_rejected (test_metrics.MetricsTests.test_negative_recovery_rejected) ... ok
+2026-11-03T11:28:34.3755738Z test_no_events_are_not_perfect_stability (test_metrics.MetricsTests.test_no_events_are_not_perfect_stability) ... ok
+2026-11-03T11:28:34.3757028Z test_open_incident_is_counted_but_not_imputed (test_metrics.MetricsTests.test_open_incident_is_counted_but_not_imputed) ... ok
+2026-11-03T11:28:34.3758176Z test_window_lead_dedup_and_recovery (test_metrics.MetricsTests.test_window_lead_dedup_and_recovery) ... ok
+2026-11-03T11:28:34.3758693Z 
+2026-11-03T11:28:34.3758975Z ----------------------------------------------------------------------
+2026-11-03T11:28:34.3759404Z Ran 7 tests in 0.005s
+2026-11-03T11:28:34.3759573Z 
+2026-11-03T11:28:34.3759676Z OK
+2026-11-03T11:28:34.3957530Z ##[group]Run actions/upload-artifact@v4
+2026-11-03T11:28:34.3957842Z with:
+2026-11-03T11:28:34.3958132Z   name: test-evidence-e6c00f361d44e6ec2992e55c036d1e897f7f0632
+2026-11-03T11:28:34.3958580Z   path: coverage/
+test-results/
+tests/system/system-results.json
+
+2026-11-03T11:28:34.3958929Z   retention-days: 14
+2026-11-03T11:28:34.3959150Z   if-no-files-found: warn
+2026-11-03T11:28:34.3959374Z   compression-level: 6
+2026-11-03T11:28:34.3959791Z   overwrite: false
+2026-11-03T11:28:34.3960005Z   include-hidden-files: false
+2026-11-03T11:28:34.3960557Z ##[endgroup]
+2026-11-03T11:28:34.5736144Z (node:3467) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-03T11:28:34.5737214Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-03T11:28:34.5892330Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-11-03T11:28:34.5895220Z The least common ancestor is /home/runner/work/ShopKZ/ShopKZ. This will be the root directory of the artifact
+2026-11-03T11:28:34.5896485Z With the provided path, there will be 14 files uploaded
+2026-11-03T11:28:34.5897683Z Artifact name is valid!
+2026-11-03T11:28:34.5898291Z Root directory input is valid!
+2026-11-03T11:28:34.8178649Z Beginning upload of artifact content to blob storage
+2026-11-03T11:28:34.8689224Z (node:3467) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-03T11:28:34.8951665Z Uploaded bytes 43105
+2026-11-03T11:28:34.9098904Z Finished uploading artifact content to blob storage!
+2026-11-03T11:28:34.9100666Z SHA256 digest of uploaded artifact zip is 7dee3f018255a5b08385d3e6bd42fdbe050194cd77d5ba6f978e5ba9e91698e4
+2026-11-03T11:28:34.9102024Z Finalizing artifact upload
+2026-11-03T11:28:35.3154297Z Artifact test-evidence-e6c00f361d44e6ec2992e55c036d1e897f7f0632.zip successfully finalized. Artifact ID 13226142914
+2026-11-03T11:28:35.3156999Z Artifact test-evidence-e6c00f361d44e6ec2992e55c036d1e897f7f0632 has been successfully uploaded! Final size is 43105 bytes. Artifact ID is 13226142914
+2026-11-03T11:28:35.3164958Z Artifact download URL: https://github.com/DiasIsenov06/ShopKZ/actions/runs/41627705114/artifacts/13226142914
+2026-11-03T11:28:35.3380824Z Post job cleanup.
+2026-11-03T11:28:35.4665125Z (node:3479) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-11-03T11:28:35.4666214Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-03T11:28:35.4920377Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/ShopKZ/ShopKZ --files-from manifest.txt --use-compress-program zstdmt
+2026-11-03T11:28:35.7258630Z (node:3479) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-11-03T11:28:36.1178091Z Sent 19359199 of 19359199 (100.0%), 46.0 MBs/sec
+2026-11-03T11:28:36.2018505Z Cache saved with the key: node-cache-Linux-x64-npm-b751694f04ba2aa20453346b753387baba1f7b0b7e6fb1364aa19e420d2cefc4
+2026-11-03T11:28:36.2189114Z Post job cleanup.
+2026-11-03T11:28:36.3106052Z [command]/usr/bin/git version
+2026-11-03T11:28:36.3154401Z git version 2.56.0
+2026-11-03T11:28:36.3230563Z Temporarily overriding HOME='/home/runner/work/_temp/ec9e8df1-dc92-416a-8d86-d76f8abebc29' before making global git config changes
+2026-11-03T11:28:36.3232285Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-03T11:28:36.3237916Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ShopKZ/ShopKZ
+2026-11-03T11:28:36.3294564Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-03T11:28:36.3341186Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-03T11:28:36.3618253Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-03T11:28:36.3658726Z http.https://github.com/.extraheader
+2026-11-03T11:28:36.3678142Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-03T11:28:36.3732546Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-03T11:28:36.4029663Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-03T11:28:36.4084715Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-03T11:28:36.4504545Z Cleaning up orphan processes
+2026-11-03T11:28:36.4946820Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

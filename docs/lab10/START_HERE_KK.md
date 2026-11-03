@@ -81,6 +81,10 @@ bash scripts/protect-main.sh DiasIsenov06/ShopKZ
 4. `DORA_ANALYSIS_KK.md`: төрт формула, дерек шектеулері, 8 жақсарту және болжанған әсер.
 5. `RELEASE_PLAN_KK.md`: R1–R3 терезелері, рөлдер, Go/no-go, DB резерві және rollback.
 
-## Қазір орындалмаған сыртқы қадамдар
+## Расталған сыртқы нәтиже және дерек шегі
 
-GitHub қосылымы берілді. Орындау барысының нақты remote дәлелдері `verification/lab10/STATUS.json` ішінде жаңартылады. Main protection-ды қолдану үшін Administration API құқығы қажет; дайын файл оның өздігінен қосылғанын білдірмейді. Репозиторийде әзірге production тарихы жоқ: толық төрт DORA санын талап ету үшін нақты deployment/incident деректері жиналуы керек. Тапсырманың барлық қабылдау өлшемдері орындалды деп осы кезеңде айтуға болмайды.
+PR №28: https://github.com/DiasIsenov06/ShopKZ/pull/28
+
+Actions run 41627705114 толық сәтті өтті: quality, security және build; 77 Jest, 8 system, 9 Playwright және 7 DORA тесті. Үш артефакт жарияланды. Main қорғауы браузер арқылы қолданылды (rule ID 85748334): кемінде бір approval, үш міндетті check, stale review dismissal, last-push approval, up-to-date branch, conversation resolution, linear history және admin bypass тыйымы. Дәлелдер verification/lab10/ ішінде.
+
+PR main-ге біріктірілген жоқ: автордан бөлек reviewer-дің мақұлдауы қажет. Оны жасанды түрде алмастыруға болмайды. Репозиторийде әзірге production тарихы жоқ: қалған DORA мәндері мен команданың деңгейі N/A. Құбыржол артефакт жариялайды, серверге автоматты deploy жасамайды.

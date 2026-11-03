@@ -1,8 +1,8 @@
 {
   "repository": "DiasIsenov06/ShopKZ",
   "environment": "production",
-  "start": "2026-10-04T11:20:12.779847+00:00",
-  "end": "2026-11-03T11:20:12.779847+00:00",
+  "start": "2026-10-04T11:49:00.312139+00:00",
+  "end": "2026-11-03T11:49:00.312139+00:00",
   "window_days": 30.0,
   "deployment_count": 0,
   "deployments_per_day": 0.0,

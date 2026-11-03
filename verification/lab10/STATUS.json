@@ -31,10 +31,23 @@
   "remote": {
     "plugin_installed": true,
     "github_tools_exposed_in_session": true,
-    "pushed": false,
-    "pull_request": null,
-    "actions_run": null,
-    "branch_protection_applied": false
+    "pushed": true,
+    "branch": "lab10-cicd-dora",
+    "source_sha": "eaef5d5d47a8f383ecb36667449396d1cab46252",
+    "pull_request": "https://github.com/DiasIsenov06/ShopKZ/pull/28",
+    "actions_run": "https://github.com/DiasIsenov06/ShopKZ/actions/runs/41627705114",
+    "actions_conclusion": "success",
+    "quality": "success",
+    "security": "success",
+    "build": "success",
+    "playwright": {
+      "passed": 9,
+      "failed": 0
+    },
+    "branch_protection_applied": true,
+    "branch_protection_rule_id": 85748334,
+    "branch_protection_evidence": "Browser verified saved rule, all three checks, one approval, stale approvals dismissed, last-push approval, up-to-date, conversation resolution, linear history and no admin bypass",
+    "merge_status": "open, independent review required"
   },
   "dora": {
     "data_source": "actual GitHub REST API",
@@ -44,5 +57,5 @@
     "recovery": null,
     "team_tiers": "not determinable without production history"
   },
-  "acceptance": "Partial: local artifacts ready. Remote Actions success, applied branch protection and actual production history remain unverified."
+  "acceptance": "CI passed on GitHub; artifact published; main protected; dashboard uses actual API. Production history is absent, so lead time/CFR/recovery and team levels are unknown."
 }

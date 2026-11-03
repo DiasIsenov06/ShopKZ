@@ -186,10 +186,20 @@ app.post('/api/orders', requireAuth, (req, res) => {
     discount = promo.percent; promoUsed = promo.code;
   }
 
+  if (!['card', 'ewallet'].includes(payment)) return res.status(400).json({ error: 'Некорректный способ оплаты.' });
+
   if (payment === 'card') {
     const digits = (cardNumber || '').replace(/\D/g, '');
     if (digits.length !== 16) return res.status(400).json({ error: 'Номер карты должен содержать 16 цифр.' });
     if (!/^\d{2}\/\d{2}$/.test(cardExpiry || '')) return res.status(400).json({ error: 'Введите срок действия в формате ММ/ГГ.' });
+    const [expiryMonth, expiryYear] = cardExpiry.split('/').map(Number);
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth() + 1;
+    if (expiryMonth < 1 || expiryMonth > 12 || 2000 + expiryYear < currentYear ||
+        (2000 + expiryYear === currentYear && expiryMonth < currentMonth)) {
+      return res.status(400).json({ error: 'Срок действия карты некорректен или истёк.' });
+    }
     if (!/^\d{3}$/.test(cardCvv || '')) return res.status(400).json({ error: 'CVV должен содержать 3 цифры.' });
     if (digits === '4000000000000002') return res.status(402).json({ error: 'Платёж отклонён банком-эмитентом. Проверьте данные карты или выберите другой способ оплаты.' });
     if (!luhnOk(digits)) return res.status(400).json({ error: 'Некорректный номер карты.' });

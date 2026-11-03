@@ -1,0 +1,36 @@
+name: PM draft with local open model
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1'
+permissions:
+  contents: read
+  issues: read
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Install official Ollama
+        run: curl -fsSL https://ollama.com/install.sh | sh
+      - name: Generate draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://localhost:11434/api/version && break || sleep 1; done
+          ollama pull qwen2.5:0.5b
+          python coursework/lab13/pm_assistant.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pm-draft-${{ github.run_id }}
+          path: |
+            coursework/lab13/*_report.md
+            coursework/lab13/*_raw.json
+            coursework/lab13/facts.json
+            coursework/lab13/generation_timing.json

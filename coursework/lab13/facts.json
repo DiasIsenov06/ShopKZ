@@ -1,0 +1,104 @@
+[
+  {
+    "period": "S1",
+    "start": "2026-10-06T00:00:00Z",
+    "end_exclusive": "2026-10-20T00:00:00Z",
+    "issues_created": 27,
+    "issues_closed": 0,
+    "commit_count": 3,
+    "open_at_end": 27,
+    "production_deployments": null,
+    "budget_actual": null,
+    "issue_refs": [
+      {
+        "number": 27,
+        "title": "[D6] Қабылдау және қорғау форматы — сыртқы келісім"
+      },
+      {
+        "number": 26,
+        "title": "[D5] Жеткізу, статус және қайтару саясаты — сыртқы келісім"
+      },
+      {
+        "number": 25,
+        "title": "[D4] Демо орналастыру ортасы — сыртқы келісім"
+      },
+      {
+        "number": 24,
+        "title": "[D3] Checkout және төлем форматы — сыртқы келісім"
+      },
+      {
+        "number": 23,
+        "title": "[D2] Тауар суреттері — сыртқы келісім"
+      },
+      {
+        "number": 22,
+        "title": "[D1] Тауар атауы, баға, санат және қалдық — сыртқы келісім"
+      },
+      {
+        "number": 21,
+        "title": "[WBS 1.6.3] README, қорытынды есеп және қорғау"
+      },
+      {
+        "number": 20,
+        "title": "[WBS 1.6.2] Демо нұсқаны шығару және тексеру"
+      }
+    ],
+    "commit_refs": [
+      "5a0700c51b19bc2c0e8b1ef8938cd2989d7acc9d",
+      "57ae290c67b1c6c54beeaa5d4d537ef3c9e05211",
+      "50887b9e25c7b702d4ef310cffe31e6d1cdf95fc"
+    ],
+    "historical_state_caveat": "created_at/closed_at reconstruction; reopen history not available, open_at_end is provisional",
+    "period_caveat": "retrospective 14-day analysis windows, formal sprint IDs not supplied"
+  },
+  {
+    "period": "S2",
+    "start": "2026-10-20T00:00:00Z",
+    "end_exclusive": "2026-11-03T00:00:00Z",
+    "issues_created": 0,
+    "issues_closed": 0,
+    "commit_count": 1,
+    "open_at_end": 27,
+    "production_deployments": null,
+    "budget_actual": null,
+    "issue_refs": [
+      {
+        "number": 27,
+        "title": "[D6] Қабылдау және қорғау форматы — сыртқы келісім"
+      },
+      {
+        "number": 26,
+        "title": "[D5] Жеткізу, статус және қайтару саясаты — сыртқы келісім"
+      },
+      {
+        "number": 25,
+        "title": "[D4] Демо орналастыру ортасы — сыртқы келісім"
+      },
+      {
+        "number": 24,
+        "title": "[D3] Checkout және төлем форматы — сыртқы келісім"
+      },
+      {
+        "number": 23,
+        "title": "[D2] Тауар суреттері — сыртқы келісім"
+      },
+      {
+        "number": 22,
+        "title": "[D1] Тауар атауы, баға, санат және қалдық — сыртқы келісім"
+      },
+      {
+        "number": 21,
+        "title": "[WBS 1.6.3] README, қорытынды есеп және қорғау"
+      },
+      {
+        "number": 20,
+        "title": "[WBS 1.6.2] Демо нұсқаны шығару және тексеру"
+      }
+    ],
+    "commit_refs": [
+      "d33b50e2ad64c1c6dd90380f5647349755ff8031"
+    ],
+    "historical_state_caveat": "created_at/closed_at reconstruction; reopen history not available, open_at_end is provisional",
+    "period_caveat": "retrospective 14-day analysis windows, formal sprint IDs not supplied"
+  }
+]

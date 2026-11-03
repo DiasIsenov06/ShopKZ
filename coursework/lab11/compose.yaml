@@ -1,0 +1,28 @@
+services:
+  shopkz:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.demo
+    environment:
+      PORT: '3000'
+      SHOPKZ_DB_PATH: /app/data/demo.db
+      SESSION_SECRET: ${SHOPKZ_SESSION_SECRET:?Set a demo-only random session secret}
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - shopkz-demo:/app/data
+    restart: unless-stopped
+  uptime-kuma:
+    image: louislam/uptime-kuma:2.0.2
+    environment:
+      UPTIME_KUMA_DB_TYPE: sqlite
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:3001:3001'
+    volumes:
+      - kuma-data:/app/data
+    depends_on:
+      - shopkz
+volumes:
+  shopkz-demo:
+  kuma-data:

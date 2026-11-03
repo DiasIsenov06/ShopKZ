@@ -1,0 +1,151 @@
+{
+  "summary": {
+    "reviewer": "AI assistant evidence comparison, not an independent human signoff",
+    "review_seconds": 30.880944454998826,
+    "review_units": 16,
+    "failed_units": 4,
+    "error_rate": 0.25,
+    "numeric_cells": 12,
+    "numeric_errors": 0,
+    "first_attempt_invalid_json": 2,
+    "first_attempt_reports": 2,
+    "generation_seconds": 7.683220534,
+    "template_generation_plus_audit_build_seconds": 0.00032925699997576885,
+    "human_manual_baseline_seconds": null,
+    "human_time_saving_seconds": null,
+    "break_even_manual_seconds": 38.564164988998826,
+    "measured_vs_template_net_seconds": -38.56383573199885,
+    "verdict": "No measured evidence of human time saving; deterministic template is faster in this benchmark. Keep LLM optional and draft-only."
+  },
+  "checks": [
+    {
+      "period": "S1",
+      "unit": "issues_created",
+      "source": 27,
+      "generated": 27,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "issues_closed",
+      "source": 0,
+      "generated": 0,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "commit_count",
+      "source": 3,
+      "generated": 3,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "open_at_end",
+      "source": 27,
+      "generated": 27,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "production_deployments",
+      "source": null,
+      "generated": null,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "budget_actual",
+      "source": null,
+      "generated": null,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S1",
+      "unit": "summary",
+      "generated": "2026-10-06 - 2026-10-20",
+      "result": "fail",
+      "note": "S1: только границы дат, нет содержательного статуса на русском. S2: англоязычное утверждение об отсутствии PM reports не подтверждено источниками."
+    },
+    {
+      "period": "S1",
+      "unit": "risks",
+      "generated": [
+        "S1",
+        "S2"
+      ],
+      "result": "fail",
+      "note": "S1/S2 не являются рисками. No PM reports available не следует из счётчиков и написано по-английски."
+    },
+    {
+      "period": "S2",
+      "unit": "issues_created",
+      "source": 0,
+      "generated": 0,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "issues_closed",
+      "source": 0,
+      "generated": 0,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "commit_count",
+      "source": 1,
+      "generated": 1,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "open_at_end",
+      "source": 27,
+      "generated": 27,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "production_deployments",
+      "source": null,
+      "generated": null,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "budget_actual",
+      "source": null,
+      "generated": null,
+      "result": "pass",
+      "note": "Сверено с facts.json и списками issue/commit; open_at_end — предварительная реконструкция."
+    },
+    {
+      "period": "S2",
+      "unit": "summary",
+      "generated": "No PM reports available.",
+      "result": "fail",
+      "note": "S1: только границы дат, нет содержательного статуса на русском. S2: англоязычное утверждение об отсутствии PM reports не подтверждено источниками."
+    },
+    {
+      "period": "S2",
+      "unit": "risks",
+      "generated": [
+        "No PM reports available."
+      ],
+      "result": "fail",
+      "note": "S1/S2 не являются рисками. No PM reports available не следует из счётчиков и написано по-английски."
+    }
+  ]
+}

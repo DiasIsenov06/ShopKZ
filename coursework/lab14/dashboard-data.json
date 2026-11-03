@@ -1,0 +1,101 @@
+{
+  "snapshot_at": "2026-11-03T12:04:52.295647+00:00",
+  "issues_total": 34,
+  "open": 34,
+  "closed": 0,
+  "max_open_age_days": 28,
+  "throughput_closed": 0,
+  "cycle_time_days": null,
+  "milestones": [
+    {
+      "release": "R1",
+      "planned": "2026-11-13",
+      "actual": null
+    },
+    {
+      "release": "R2",
+      "planned": "2026-12-18",
+      "actual": null
+    },
+    {
+      "release": "R3",
+      "planned": "2027-01-29",
+      "actual": null
+    }
+  ],
+  "budget": {
+    "planned_person_hours": 300,
+    "capacity_person_hours": 312,
+    "assumed_rate_kzt": 2000,
+    "scenario_budget_kzt": 600000,
+    "actual_kzt": null
+  },
+  "dora": {
+    "repository": "DiasIsenov06/ShopKZ",
+    "environment": "production",
+    "start": "2026-10-04T11:49:00.312139+00:00",
+    "end": "2026-11-03T11:49:00.312139+00:00",
+    "window_days": 30.0,
+    "deployment_count": 0,
+    "deployments_per_day": 0.0,
+    "lead_time_hours_median": null,
+    "change_failure_rate_percent": null,
+    "failed_deployment_count": 0,
+    "recovery_hours_median": null,
+    "lead_samples": 0,
+    "recovery_samples": 0,
+    "open_incidents": 0,
+    "incidents_complete": false,
+    "tiers": {
+      "deployment_frequency": "N/A: production events absent",
+      "lead_time": "N/A: insufficient evidence",
+      "change_failure_rate": "N/A: insufficient evidence",
+      "recovery_time": "N/A: insufficient evidence"
+    },
+    "warnings": [],
+    "successful_deployments": [],
+    "rubric": "Educational fixed thresholds; not a current official DORA team ranking. No events => no team tier."
+  },
+  "dependencies": [
+    {
+      "number": 27,
+      "title": "[D6] Қабылдау және қорғау форматы — сыртқы келісім",
+      "state": "open"
+    },
+    {
+      "number": 26,
+      "title": "[D5] Жеткізу, статус және қайтару саясаты — сыртқы келісім",
+      "state": "open"
+    },
+    {
+      "number": 25,
+      "title": "[D4] Демо орналастыру ортасы — сыртқы келісім",
+      "state": "open"
+    },
+    {
+      "number": 24,
+      "title": "[D3] Checkout және төлем форматы — сыртқы келісім",
+      "state": "open"
+    },
+    {
+      "number": 23,
+      "title": "[D2] Тауар суреттері — сыртқы келісім",
+      "state": "open"
+    },
+    {
+      "number": 22,
+      "title": "[D1] Тауар атауы, баға, санат және қалдық — сыртқы келісім",
+      "state": "open"
+    }
+  ],
+  "runs": [
+    {
+      "id": 41631246013,
+      "conclusion": "success"
+    },
+    {
+      "id": 41627705114,
+      "conclusion": "success"
+    }
+  ]
+}

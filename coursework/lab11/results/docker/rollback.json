@@ -1,0 +1,11 @@
+{
+  "good_image": "sha256:4e3cfa01121052ef29d105648e88d8b1594e4a3a979473fe104f4d6475353b37",
+  "bad_image": "sha256:fcfb600595b613bf1235defdcc8690c3551160a63cdd44858c711f0ca9458729",
+  "restored_image": "sha256:4e3cfa01121052ef29d105648e88d8b1594e4a3a979473fe104f4d6475353b37",
+  "order_preserved": true,
+  "integrity": "ok",
+  "seconds": 1.4296503630000075,
+  "schema_migration_tested": false,
+  "backup_integrity": "ok",
+  "fault": "isolated image CMD exits 23"
+}

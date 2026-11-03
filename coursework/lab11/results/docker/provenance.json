@@ -1,0 +1,9 @@
+{
+  "run_id": 41639836731,
+  "job_id": 125930241591,
+  "conclusion": "success",
+  "commit": "133a5cf501c6b61eee41d3019ab93c69f93cb9c0",
+  "artifact_id": 13233135957,
+  "artifact_digest": "sha256:da3c30cffc2d97c823a86bdfd595019510511b33d4ebdebfad786533f58756ba",
+  "source_url": "https://github.com/DiasIsenov06/ShopKZ/actions/runs/41639836731"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "event": "healthy monitor baseline",
+    "utc": "2026-11-03T12:57:31Z"
+  },
+  {
+    "event": "intentional demo stop",
+    "utc": "2026-11-03T12:57:42Z"
+  },
+  {
+    "event": "demo restarted",
+    "utc": "2026-11-03T12:58:38Z"
+  },
+  {
+    "event": "Kuma DOWN then UP confirmed",
+    "utc": "2026-11-03T12:59:23Z"
+  },
+  {
+    "event": "faulty training image fails readiness",
+    "utc": "2026-11-03T12:59:53Z"
+  },
+  {
+    "event": "known-good image rollback preserves order",
+    "utc": "2026-11-03T12:59:54Z"
+  }
+]

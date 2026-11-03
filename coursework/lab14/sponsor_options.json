@@ -1,0 +1,37 @@
+{
+  "hypothetical_roleplay": true,
+  "base_deadline": "2027-01-29",
+  "delay_weeks": 4,
+  "assumed_rate_kzt_per_hour": 2000,
+  "baseline_budget_kzt": 600000,
+  "budget_actual_kzt": null,
+  "options": [
+    {
+      "option": "A сохранить весь объем и команду",
+      "deadline": "2027-02-26",
+      "scope_hours": 300,
+      "extra_hours": 0,
+      "extra_budget_kzt": 0,
+      "total_budget_kzt": 600000,
+      "assumptions": "фиксированная оплата за объем, без расходов продления инфраструктуры"
+    },
+    {
+      "option": "B сохранить срок сократить объем",
+      "deadline": "2027-01-29",
+      "scope_hours": 184,
+      "extra_hours": 0,
+      "extra_budget_kzt": 0,
+      "total_budget_kzt": 368000,
+      "assumptions": "из 300 ч отложить 4×29=116 ч; экономия только при оплате фактического объема"
+    },
+    {
+      "option": "C сохранить срок и объем усилить команду",
+      "deadline": "2027-01-29",
+      "scope_hours": 300,
+      "extra_hours": 145,
+      "extra_budget_kzt": 290000,
+      "total_budget_kzt": 890000,
+      "assumptions": "дефицит 116 эффективных ч / 0.8 продуктивности =145 оплачиваемых ч; параллельность и 20% потерь еще не проверены"
+    }
+  ]
+}

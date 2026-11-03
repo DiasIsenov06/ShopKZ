@@ -1,0 +1,14 @@
+meta {
+  name: Search
+  type: http
+  seq: 2
+}
+get {
+  url: {{baseUrl}}/api/products?search=AirBeat
+  body: none
+  auth: none
+}
+tests {
+  test("search status", function () { expect(res.getStatus()).to.equal(200); });
+  test("one product", function () { expect(res.getBody().products.length).to.equal(1); });
+}

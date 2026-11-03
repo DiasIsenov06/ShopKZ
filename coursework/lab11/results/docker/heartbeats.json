@@ -1,0 +1,62 @@
+[
+  {
+    "monitorID": 1,
+    "status": 1,
+    "time": "2026-11-03 12:57:06.044",
+    "msg": "200 - OK",
+    "ping": 6,
+    "important": true,
+    "retries": 0
+  },
+  {
+    "monitorID": 1,
+    "status": 1,
+    "time": "2026-11-03 12:57:26.044",
+    "msg": "200 - OK",
+    "ping": 5,
+    "important": false,
+    "retries": 0
+  },
+  {
+    "monitorID": 1,
+    "status": 0,
+    "time": "2026-11-03 12:57:46.044",
+    "msg": "timeout of 3000ms exceeded",
+    "important": true,
+    "retries": 1
+  },
+  {
+    "monitorID": 1,
+    "status": 0,
+    "time": "2026-11-03 12:58:06.044",
+    "msg": "timeout of 3000ms exceeded",
+    "important": false,
+    "retries": 2
+  },
+  {
+    "monitorID": 1,
+    "status": 0,
+    "time": "2026-11-03 12:58:26.044",
+    "msg": "timeout of 3000ms exceeded",
+    "important": false,
+    "retries": 3
+  },
+  {
+    "monitorID": 1,
+    "status": 1,
+    "time": "2026-11-03 12:58:46.044",
+    "msg": "200 - OK",
+    "ping": 4,
+    "important": true,
+    "retries": 0
+  },
+  {
+    "monitorID": 1,
+    "status": 1,
+    "time": "2026-11-03 12:59:06.044",
+    "msg": "200 - OK",
+    "ping": 5,
+    "important": false,
+    "retries": 0
+  }
+]

@@ -1,0 +1,14 @@
+meta {
+  name: Catalog
+  type: http
+  seq: 1
+}
+get {
+  url: {{baseUrl}}/api/products
+  body: none
+  auth: none
+}
+tests {
+  test("catalog status", function () { expect(res.getStatus()).to.equal(200); });
+  test("12 products", function () { expect(res.getBody().products.length).to.equal(12); });
+}

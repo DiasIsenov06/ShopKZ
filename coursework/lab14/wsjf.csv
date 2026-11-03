@@ -1,0 +1,11 @@
+id,initiative,business_value,time_criticality,risk_reduction,job_size,cost_of_delay,wsjf,owner_role,related_issue,estimate_kind,rank
+I01,Атомарность заказа и остатков,13,13,13,3,39,13.0,Backend,14,"author planning estimate, relative Fibonacci scale",1
+I02,Мониторинг и автоматический перезапуск,8,13,13,3,34,11.333333333333334,DevOps,30,"author planning estimate, relative Fibonacci scale",2
+I03,Внешняя UAT checkout,13,13,8,5,34,6.8,QA,32,"author planning estimate, relative Fibonacci scale",3
+I04,Резервирование и проверенный rollback,8,8,13,5,29,5.8,Backend,31,"author planning estimate, relative Fibonacci scale",4
+I05,Уточнение описаний и фильтров каталога,8,5,3,3,16,5.333333333333333,Frontend,10,"author planning estimate, relative Fibonacci scale",5
+I07,Безопасность сессий демостенда,13,8,13,8,34,4.25,Backend,13,"author planning estimate, relative Fibonacci scale",6
+I06,Доступность мобильного интерфейса,8,5,5,5,18,3.6,Frontend,12,"author planning estimate, relative Fibonacci scale",7
+I10,Черновик PM отчета,5,5,5,5,15,3.0,PM,,"author planning estimate, relative Fibonacci scale",8
+I09,Классификатор обращений,8,3,5,8,16,2.0,AI,,"author planning estimate, relative Fibonacci scale",9
+I08,Персональные рекомендации,5,3,3,13,11,0.8461538461538461,AI,,"author planning estimate, relative Fibonacci scale",10

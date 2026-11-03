@@ -30,7 +30,7 @@ try:
   time.sleep(2)
  else:raise RuntimeError('No monitor created')
  time.sleep(25);event('healthy monitor baseline')
- dc('stop','shopkz');event('intentional demo stop');time.sleep(45)
+ dc('stop','shopkz');event('intentional demo stop');time.sleep(55)
  dc('start','shopkz');waithealthy();event('demo restarted');time.sleep(45)
  subprocess.run(['docker','cp',kuma+':/tmp/heartbeats.json',str(OUT/'heartbeats.json')],check=True)
  beats=json.loads((OUT/'heartbeats.json').read_text());statuses=[b['status'] for b in beats]

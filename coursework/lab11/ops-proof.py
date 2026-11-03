@@ -42,7 +42,7 @@ try:
  # Use a disposable app image that exits once from its own main process.
  # The marker lives in the demo volume, so the restarted process stays healthy.
  original_good=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]['Image']
- crash_code="const f=require('fs');require('./server.js');setTimeout(()=>{const p='/app/data/crashed-once';if(!f.existsSync(p)){f.writeFileSync(p,'1');process.exit(23);}},3000);"
+ crash_code="const f=require('fs');require('./server.js').listen(process.env.PORT||3000);setTimeout(()=>{const p='/app/data/crashed-once';if(!f.existsSync(p)){f.writeFileSync(p,'1');process.exit(23);}},3000);"
  change='CMD '+json.dumps(['node','-e',crash_code])
  subprocess.run(['docker','commit','--change',change,container,'shopkz-lab11-crash:exercise'],check=True,capture_output=True)
  restart_override=OUT/'restart-version.yaml';restart_override.write_text('services:\n  shopkz:\n    image: shopkz-lab11-crash:exercise\n')
@@ -63,7 +63,7 @@ try:
  old_id='rollback-proof-order'
  seed="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.prepare(\"INSERT INTO orders(id,user_email,items,total) VALUES(?,?,?,?)\").run('rollback-proof-order','rollback@example.test','[]',19350);console.log(d.pragma('integrity_check'));d.close();"
  subprocess.run(['docker','exec',container,'node','-e',seed],check=True,capture_output=True)
- backup="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.backup('/app/data/pre-rollback.db').then(()=>d.close());"
+ backup="const D=require('better-sqlite3');const d=new D(process.env.SHOPKZ_DB_PATH);d.backup('/app/data/pre-rollback.db').then(()=>{const b=new D('/app/data/pre-rollback.db',{readonly:true});if(b.pragma('integrity_check',{simple:true})!=='ok')process.exit(1);b.close();d.close();});"
  subprocess.run(['docker','exec',container,'node','-e',backup],check=True,capture_output=True)
  good_image=original_good
  bad_image=subprocess.run(['docker','commit','--change','CMD ["node","-e","process.exit(23)"]',container,'shopkz-lab11-bad:exercise'],check=True,capture_output=True,text=True).stdout.strip()
@@ -77,7 +77,7 @@ try:
  subprocess.run(['docker','exec',container,'node','-e',check],check=True,capture_output=True)
  restored=json.loads(subprocess.run(['docker','inspect',container],check=True,capture_output=True,text=True).stdout)[0]
  assert restored['Image']==good_image and good_image!=bad_image
- rollback={'good_image':good_image,'bad_image':bad_image,'restored_image':restored['Image'],'order_preserved':True,'integrity':'ok','seconds':time.monotonic()-rollback_start,'schema_migration_tested':False,'fault':'isolated image CMD exits 23'}
+ rollback={'good_image':good_image,'bad_image':bad_image,'restored_image':restored['Image'],'order_preserved':True,'integrity':'ok','seconds':time.monotonic()-rollback_start,'schema_migration_tested':False,'backup_integrity':'ok','fault':'isolated image CMD exits 23'}
  (OUT/'rollback.json').write_text(json.dumps(rollback,indent=2));event('known-good image rollback preserves order')
  (OUT/'summary.json').write_text(json.dumps({'monitor_statuses':statuses,'restart_count':inspected['RestartCount'],'restart_recovery_seconds':recovery,'events':events},indent=2))
  (OUT/'events.json').write_text(json.dumps(events,indent=2))

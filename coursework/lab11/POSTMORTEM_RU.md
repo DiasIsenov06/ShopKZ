@@ -38,3 +38,9 @@ https://github.com/DiasIsenov06/ShopKZ/issues/29
 https://github.com/DiasIsenov06/ShopKZ/issues/30
 
 https://github.com/DiasIsenov06/ShopKZ/issues/31
+
+## Проверка корректирующих действий 03.11.2026
+
+GitHub Actions run 41639836731, job monitoring: success. Kuma в Docker зарегистрировал UP/DOWN/UP (HTTP timeout 3 с, интервал 20 с, retries=0). Автоматический перезапуск тренировочного приложения подтверждён RestartCount=1 и тремя последовательными HTTP 200 за 4,561 с наблюдения. Возврат от ошибочного образа к исходному занял 1,430 с; тестовый заказ сохранён, исходный image SHA восстановлен. Резерв и рабочая SQLite: integrity_check=ok. Миграции схемы не проверялись. Это не production MTTR.
+
+Ранние прогоны выявили неполный checkout Dockerfile, гонку Socket.IO, чрезмерный HTTP timeout и неверную обвязку запуска экспортированного Express app. Условия исправлены, люди не обвиняются. Журналы и исходники сохранены. Issues #29–31 содержат ссылки на проверку и остаются открыты до review и merge PR #36. Внешняя UAT #32 не проводилась.

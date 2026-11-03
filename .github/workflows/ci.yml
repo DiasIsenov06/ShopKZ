@@ -1,0 +1,86 @@
+name: ShopKZ CI
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run check
+      - run: npm run test:coverage
+      - run: npm run test:system
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: python3 -m unittest discover -s dora -p 'test_*.py' -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-evidence-${{ github.sha }}
+          path: |
+            coverage/
+            test-results/
+            tests/system/system-results.json
+          retention-days: 14
+  security:
+    name: security
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          version: v0.76.1
+          scan-type: fs
+          scan-ref: .
+          trivy-config: trivy.yaml
+          scanners: vuln
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+          format: json
+          output: trivy.json
+          skip-dirs: node_modules,.git,practical5,verification
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vulnerability-report-${{ github.sha }}
+          path: trivy.json
+          if-no-files-found: warn
+  build:
+    name: build
+    needs: [quality, security]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: cd dist && sha256sum -c SHA256SUMS
+      - run: tar -czf shopkz-${{ github.sha }}.tar.gz -C dist .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shopkz-${{ github.sha }}
+          path: shopkz-${{ github.sha }}.tar.gz
+          if-no-files-found: error
+          retention-days: 30

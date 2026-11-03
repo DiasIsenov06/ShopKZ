@@ -13,7 +13,9 @@
     "test:coverage": "jest --coverage --runInBand",
     "test:system": "node tests/system/system.test.js",
     "test:e2e": "playwright test tests/e2e",
-    "check": "node --check public/app.js && node --check public/enhancements.js && node --check public/init.js && node --check public/theme.js && node --check server.js && node --check db.js"
+    "check": "node --check public/app.js && node --check public/enhancements.js && node --check public/init.js && node --check public/theme.js && node --check server.js && node --check db.js",
+    "lint": "eslint .",
+    "build": "node scripts/build.cjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,7 +25,10 @@
     "express-session": "^1.18.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.47.0",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
     "jest": "^29.7.0",
     "supertest": "^7.0.0"
   },
@@ -41,5 +46,10 @@
       "server.js"
     ],
     "coverageDirectory": "coverage"
+  },
+  "overrides": {
+    "express": {
+      "body-parser": "1.20.9"
+    }
   }
 }

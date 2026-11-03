@@ -1,0 +1,186 @@
+Browser tab: 3, Title: "Settings · Branches · Branch protection rule · DiasIsenov06/ShopKZ", URL: "https://github.com/DiasIsenov06/ShopKZ/settings/branch_protection_rules/85748334".
+1 AXWebArea Settings · Branches · Branch protection rule · DiasIsenov06/ShopKZ, URL: github.com/DiasIsenov06/ShopKZ/settings/branch_protection_rules/85748334
+	2 container
+		3 link Description: Skip to content, Value: github.com/DiasIsenov06/ShopKZ/settings/branch_protection_rules/85748334#start-of-content
+		4 container Global navigation menu
+			5 pop up button Open menu
+			6 link Description: Homepage ( g then d ), Value: github.com/
+			7 container Breadcrumbs
+				8 content list
+					9 container
+						10 link Description: DiasIsenov06, Value: github.com/DiasIsenov06
+					11 container
+						12 link Description: ShopKZ, Value: github.com/DiasIsenov06/ShopKZ
+						13 pop up button (collapsed) Switch repository ( alt shift r ), Secondary Actions: Expand
+			14 button Open quick search dialog, type / to search
+				15 text Type 
+				16 text /
+				17 text  to search
+			18 link Description: Chat with Copilot, Value: github.com/copilot
+			19 pop up button (collapsed) Description: Open Copilot…, Secondary Actions: Expand
+			20 pop up button (collapsed) Create new..., Secondary Actions: Expand
+			21 link Description: All issues, Value: github.com/issues
+			22 link Description: All pull requests, Value: github.com/pulls
+			23 link Description: All repositories, Value: github.com/repos
+			24 link Description: You have no unread notifications ( g then n ), Value: github.com/notifications
+			25 pop up button Open user navigation menu
+				26 image User avatar
+			27 heading Repository navigation, Value: 2
+				28 text Repository navigation
+			29 container Repository
+				30 content list
+					31 link Description: Code, Value: github.com/DiasIsenov06/ShopKZ
+					32 link Description: Issues  (27), Value: github.com/DiasIsenov06/ShopKZ/issues
+					33 link Description: Pull requests  (1), Value: github.com/DiasIsenov06/ShopKZ/pulls
+					34 link Description: Agents, Value: github.com/DiasIsenov06/ShopKZ/agents?author=DiasIsenov06
+					35 link Description: Discussions, Value: github.com/DiasIsenov06/ShopKZ/discussions
+					36 link Description: Actions, Value: github.com/DiasIsenov06/ShopKZ/actions
+					37 link Description: Projects, Value: github.com/DiasIsenov06/ShopKZ/projects
+					38 link Description: Wiki, Value: github.com/DiasIsenov06/ShopKZ/wiki
+					39 link Description: Security and quality, Value: github.com/DiasIsenov06/ShopKZ/security
+					40 link Description: Insights, Value: github.com/DiasIsenov06/ShopKZ/pulse
+					41 link Description: Settings, Value: github.com/DiasIsenov06/ShopKZ/settings
+	42 container repo-content-pjax-container
+		43 heading Settings: DiasIsenov06/ShopKZ, Value: 1
+			44 text Settings: DiasIsenov06/ShopKZ
+		45 container General settings
+			46 content list
+				47 link Description: General, Value: github.com/DiasIsenov06/ShopKZ/settings, ID: item-e28e42ba-3481-45a9-a1fd-1990a3a88864
+				48 container
+					49 heading Access, Value: 2, ID: heading-title-25389ce0-9484-4f0a-9e39-d854b0163fe2
+						50 text Access
+					51 content list Access, ID: group-f02d8398-aeaf-4314-8e95-cb1d3e10f7e2
+						52 link Description: Collaborators, Value: github.com/DiasIsenov06/ShopKZ/settings/access, ID: item-6d9a6244-bfc1-4d31-b402-8887dc1ee5ea
+						53 button (collapsed) Moderation, ID: item-0f29f3b0-5f3d-4f37-8d09-45c213561aec, Secondary Actions: Expand
+				54 container
+					55 heading Code, planning, and automation, Value: 2, ID: heading-title-da757f74-963a-4772-8b7b-1d63995e9051
+						56 text Code, planning, and automation
+					57 content list Code, planning, and automation, ID: group-c8452fce-23fe-4cc3-a2a3-42b9e0dcd5ed
+						58 button (collapsed) Rulesets, ID: repo_rules, Secondary Actions: Expand
+						59 link Description: Branches, Value: github.com/DiasIsenov06/ShopKZ/settings/branches, ID: item-a07dd502-a310-4110-a817-1f8511eafcb6
+						60 link Description: Tags, Value: github.com/DiasIsenov06/ShopKZ/settings/tag_protection, ID: item-5436d60f-fe6d-412e-ad4c-5e1df53c5ccd
+						61 button (collapsed) Actions, ID: item-73597a36-7095-4114-ac2d-3a5aa9bdc3c7, Secondary Actions: Expand
+						62 link Description: Webhooks, Value: github.com/DiasIsenov06/ShopKZ/settings/hooks, ID: item-af198061-d186-4010-9cb1-b6e86b39111d
+						63 button (collapsed) Copilot, ID: item-f9c43bc2-1714-4d6a-b163-1aec07247fc7, Secondary Actions: Expand
+						64 button (collapsed) Planning, ID: repo_planning, Secondary Actions: Expand
+						65 link Description: Environments, Value: github.com/DiasIsenov06/ShopKZ/settings/environments, ID: item-1a7e98a1-2523-4bf1-b696-9adfa6fa6b89
+						66 link Description: Codespaces, Value: github.com/DiasIsenov06/ShopKZ/settings/codespaces, ID: item-55c38261-b836-48a1-a15f-b546840b14a0
+						67 link Description: Pages, Value: github.com/DiasIsenov06/ShopKZ/settings/pages, ID: item-e64e3be1-4aab-4131-97c0-a999f5530a12
+				68 container
+					69 heading Security and quality, Value: 2, ID: heading-title-5a744eb4-5bf8-4d84-8bf4-02436743e615
+						70 text Security and quality
+					71 content list Security and quality, ID: group-710ca533-e2ba-4a2a-9367-d232b5b9d4f3
+						72 link Description: Advanced Security, Value: github.com/DiasIsenov06/ShopKZ/settings/security_analysis, ID: item-6d63659d-6b55-48ee-bb70-fd74257f9be4
+						73 link Description: Deploy keys, Value: github.com/DiasIsenov06/ShopKZ/settings/keys, ID: item-bee537c1-3c89-40ca-b94e-b4508a680ce1
+						74 button (collapsed) Secrets and variables, ID: item-0f794f47-5a22-495d-9f41-094a0759bffe, Secondary Actions: Expand
+				75 container
+					76 heading Integrations, Value: 2, ID: heading-title-672348c4-b37d-45fc-83ae-5854ecba0300
+						77 text Integrations
+					78 content list Integrations, ID: group-86e19742-814e-4139-a1d6-f7da4995ea12
+						79 link Description: GitHub Apps, Value: github.com/DiasIsenov06/ShopKZ/settings/installations, ID: item-d6e62c75-82b3-4dee-a84a-c6a7b9ed401a
+		80 container
+			81 heading Branch protection rule, Value: 2
+				82 text Branch protection rule
+			83 container Rulesets are the preferred path
+				84 container
+					85 heading Level up your branch protections with Repository Rules, Value: 1
+						86 text Level up your branch protections with Repository Rules
+					87 text Rulesets are the recommended replacement for classic branch protections. They support rule layering, evaluate mode, and organization-wide policies. 
+					88 link Description: Learn more about Rulesets., Value: docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets
+			89 heading Branch name pattern*, Value: 2
+				90 definition list
+					91 container Branch name pattern*
+						92 container
+							93 text Branch name pattern *
+			94 text field (settable) Branch name pattern*, Value: main, ID: rule_field
+			95 text Applies to 1 branch
+			96 text main
+			97 heading Protect matching branches, Value: 3
+				98 text Protect matching branches
+			99 checkbox (settable, integer) Description: Require a pull request before merging, Value: 1, ID: has_required_reviews
+			100 text When enabled, all commits must be made to a non-protected branch and submitted via a pull request before they can be merged into a branch that matches this rule.
+			101 checkbox (settable, integer) Description: Require approvals, Value: 1, ID: has_required_reviews_reviews
+			102 text When enabled, pull requests targeting a matching branch require a number of approvals and no changes requested before they can be merged.
+			103 pop up button (collapsed) Required number of approvals before merging: 1, Secondary Actions: Expand
+				104 text Required number of approvals before merging:
+				105 text 1
+			106 checkbox (settable, integer) Description: Dismiss stale pull request approvals when new commits are pushed, Value: 1, ID: dismiss_stale_reviews_on_push
+			107 text New reviewable commits pushed to a matching branch will dismiss pull request review approvals.
+			108 checkbox (settable, integer) Description: Require review from Code Owners, Value: 0, ID: require_code_owner_review
+			109 text Require an approved review in pull requests including files with a designated code owner.
+			110 checkbox (settable, integer) Description: Require approval of the most recent reviewable push, Value: 1, ID: require_last_push_approval
+			111 text Whether the most recent reviewable push must be approved by someone other than the person who pushed it.
+			112 checkbox (settable, integer) Description: Require status checks to pass before merging, Value: 1, ID: has_required_statuses
+			113 container require_status_checks_pass_desc
+				114 text Choose which 
+				115 link Description: status checks, Value: docs.github.com/rest/commits/statuses
+				116 text  must pass before branches can be merged into a branch that matches this rule. When enabled, commits must first be pushed to another branch, then merged or pushed directly to a branch that matches this rule after status checks have passed.
+			117 checkbox (settable, integer) Description: Require branches to be up to date before merging, Value: 1, ID: strict_required_status_checks_policy
+			118 text This ensures pull requests targeting a matching branch have been tested with the latest code. This setting will not take effect unless at least one status check is enabled (see below).
+			119 combo box (collapsed, settable) Description: Search for status checks in the last week for this repository, Secondary Actions: Expand
+			120 text Search for status checks in the last week for this repository
+			121 text Status checks that are required
+			122 content list
+				123 container
+					124 text quality
+					125 container Description: Accept updates from, ID: select-menu-679e49ec-d11e-4033-95d6-791e4246c36e
+						126 pop up button (collapsed) @github-actions GitHub Actions , Secondary Actions: Expand
+							127 image @github-actions
+							128 text  GitHub Actions 
+					129 button Remove quality as a required status check
+				130 container
+					131 text security
+					132 container Description: Accept updates from, ID: select-menu-011bc8ef-9338-4eab-81a8-63811025ddd1
+						133 pop up button (collapsed) @github-actions GitHub Actions , Secondary Actions: Expand
+							134 image @github-actions
+							135 text  GitHub Actions 
+					136 button Remove security as a required status check
+				137 container
+					138 text build
+					139 container Description: Accept updates from, ID: select-menu-72796537-8067-4fff-86a6-98f8adb2989b
+						140 pop up button (collapsed) @github-actions GitHub Actions , Secondary Actions: Expand
+							141 image @github-actions
+							142 text  GitHub Actions 
+					143 button Remove build as a required status check
+			144 checkbox (settable, integer) Description: Require conversation resolution before merging, Value: 1, ID: requires_conversation_resolution
+			145 container require_conversation_resolution_desc
+				146 text When enabled, all conversations on code must be resolved before a pull request can be merged into a branch that matches this rule. 
+				147 link Description: Learn more about requiring conversation completion before merging, Value: docs.github.com/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches#require-conversation-resolution-before-merging
+				148 text .
+			149 checkbox (settable, integer) Description: Require signed commits, Value: 0, ID: has_signature_requirement
+			150 text Commits pushed to matching branches must have verified signatures.
+			151 checkbox (settable, integer) Description: Require linear history, Value: 1, ID: block_merge_commits
+			152 text Prevent merge commits from being pushed to matching branches.
+			153 checkbox (settable, integer) Description: Require deployments to succeed before merging, Value: 0, ID: has_required_deployments
+			154 text Choose which environments must be successfully deployed to before branches can be merged into a branch that matches this rule.
+			155 checkbox (settable, integer) Description: Lock branch, Value: 0, ID: lock_branch
+			156 text Branch is read-only. Users cannot push to the branch.
+			157 checkbox (settable, integer) Description: Do not allow bypassing the above settings, Value: 1, ID: enforce_all_for_admins
+			158 text The above settings will apply to administrators and custom roles with the "bypass branch protections" permission.
+			159 heading Rules applied to everyone including administrators, Value: 3
+				160 text Rules applied to everyone including administrators
+			161 checkbox (settable, integer) Description: Allow force pushes, Value: 0, ID: allows_force_pushes
+			162 text Permit force pushes for all users with push access.
+			163 checkbox (settable, integer) Description: Allow deletions, Value: 0, ID: allows_deletions
+			164 text Allow users with push access to delete matching branches.
+			165 button Save changes
+	166 container
+		167 heading Footer, Value: 2
+			168 text Footer
+		169 link Description: GitHub Homepage, Value: github.com/
+		170 text © 2026 GitHub, Inc.
+		171 container Footer
+			172 heading Footer navigation, Value: 3, ID: sr-footer-heading
+				173 text Footer navigation
+			174 content list Footer navigation
+				175 link Description: Terms, Value: docs.github.com/site-policy/github-terms/github-terms-of-service
+				176 link Description: Privacy, Value: docs.github.com/site-policy/privacy-policies/github-privacy-statement
+				177 link Description: Security, Value: github.com/security
+				178 link Description: Status, Value: githubstatus.com/
+				179 link Description: Community, Value: github.community/
+				180 link Description: Docs, Value: docs.github.com/
+				181 link Description: Contact, Value: support.github.com/?tags=dotcom-footer
+				182 button Manage cookies
+				183 button Do not share my personal information
+
+The focused UI element is 1 AXWebArea Settings · Branches · Branch protection rule · DiasIsenov06/ShopKZ, URL: github.com/DiasIsenov06/ShopKZ/settings/branch_protection_rules/85748334

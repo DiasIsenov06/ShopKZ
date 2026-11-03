@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-03",
+  "repository": "https://github.com/DiasIsenov06/ShopKZ",
+  "local": {
+    "npm_ci": "passed",
+    "eslint": "passed",
+    "syntax": "passed",
+    "jest": {
+      "passed": 77,
+      "failed": 0
+    },
+    "system": {
+      "passed": 8,
+      "failed": 0
+    },
+    "dora_unit": {
+      "passed": 7,
+      "failed": 0
+    },
+    "build": "passed",
+    "checksums": "passed",
+    "trivy_high_critical": "passed (runtime and dev dependencies)",
+    "npm_audit": {
+      "high": 0,
+      "critical": 0,
+      "moderate": 21,
+      "low": 4
+    },
+    "playwright": "blocked: Chromium cannot create Unix socket in restricted execution environment (EPERM); 8 launch failures, 1 not run; no E2E success claim"
+  },
+  "remote": {
+    "plugin_installed": true,
+    "github_tools_exposed_in_session": true,
+    "pushed": true,
+    "branch": "lab10-cicd-dora",
+    "source_sha": "eaef5d5d47a8f383ecb36667449396d1cab46252",
+    "pull_request": "https://github.com/DiasIsenov06/ShopKZ/pull/28",
+    "actions_run": "https://github.com/DiasIsenov06/ShopKZ/actions/runs/41627705114",
+    "actions_conclusion": "success",
+    "quality": "success",
+    "security": "success",
+    "build": "success",
+    "playwright": {
+      "passed": 9,
+      "failed": 0
+    },
+    "branch_protection_applied": true,
+    "branch_protection_rule_id": 85748334,
+    "branch_protection_evidence": "Browser verified saved rule, all three checks, one approval, stale approvals dismissed, last-push approval, up-to-date, conversation resolution, linear history and no admin bypass",
+    "merge_status": "open, independent review required"
+  },
+  "dora": {
+    "data_source": "actual GitHub REST API",
+    "production_deployments": 0,
+    "lead_time": null,
+    "cfr": null,
+    "recovery": null,
+    "team_tiers": "not determinable without production history"
+  },
+  "acceptance": "CI passed on GitHub; artifact published; main protected; dashboard uses actual API. Production history is absent, so lead time/CFR/recovery and team levels are unknown."
+}

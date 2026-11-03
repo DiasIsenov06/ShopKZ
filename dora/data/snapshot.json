@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "repository": "DiasIsenov06/ShopKZ",
+  "start": "2026-10-04T11:49:00.312139+00:00",
+  "end": "2026-11-03T11:49:00.312139+00:00",
+  "environment": "production",
+  "incidents_complete": false,
+  "deployments": [],
+  "incidents": [],
+  "warnings": [],
+  "repository_context": {
+    "commit_count": 4,
+    "issue_count": 27,
+    "workflow_run_count": 1
+  },
+  "source": "GitHub REST API; all deployment/status/issue/commit pages; no synthetic production events"
+}

@@ -1,0 +1,26 @@
+{
+  "repository": "DiasIsenov06/ShopKZ",
+  "environment": "production",
+  "start": "2026-10-04T11:49:00.312139+00:00",
+  "end": "2026-11-03T11:49:00.312139+00:00",
+  "window_days": 30.0,
+  "deployment_count": 0,
+  "deployments_per_day": 0.0,
+  "lead_time_hours_median": null,
+  "change_failure_rate_percent": null,
+  "failed_deployment_count": 0,
+  "recovery_hours_median": null,
+  "lead_samples": 0,
+  "recovery_samples": 0,
+  "open_incidents": 0,
+  "incidents_complete": false,
+  "tiers": {
+    "deployment_frequency": "N/A: production events absent",
+    "lead_time": "N/A: insufficient evidence",
+    "change_failure_rate": "N/A: insufficient evidence",
+    "recovery_time": "N/A: insufficient evidence"
+  },
+  "warnings": [],
+  "successful_deployments": [],
+  "rubric": "Educational fixed thresholds; not a current official DORA team ranking. No events => no team tier."
+}

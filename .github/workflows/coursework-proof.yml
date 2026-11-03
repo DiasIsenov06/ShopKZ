@@ -2,6 +2,14 @@ name: Coursework execution evidence
 on:
   push:
     branches: [lab11-15-completion]
+    paths:
+      - '.github/workflows/coursework-proof.yml'
+      - 'Dockerfile.demo'
+      - 'coursework/lab11/*.py'
+      - 'coursework/lab11/*.cjs'
+      - 'coursework/lab11/compose.yaml'
+      - 'coursework/lab13/pm_assistant.py'
+      - 'coursework/lab14/*.py'
   workflow_dispatch:
 permissions:
   contents: read

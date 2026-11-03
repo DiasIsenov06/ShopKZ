@@ -9,8 +9,12 @@ const call = (name,...args) => new Promise((resolve,reject) => {
 });
 socket.on('connect', async () => {
   try {
+    // Server awaits sendInfo before registering command handlers.
+    await new Promise(resolve=>setTimeout(resolve,1000));
+    console.log('Connected, checking setup');
     const needed = await call('needSetup');
     if (needed) await call('setup','demo-admin',process.env.KUMA_DEMO_PASSWORD);
+    console.log('Setup ready');
     await call('login',{username:'demo-admin',password:process.env.KUMA_DEMO_PASSWORD,token:''});
     const m = await call('add',{type:'http',name:'ShopKZ isolated demo',url:'http://shopkz:3000/api/products',method:'GET',interval:20,retryInterval:20,resendInterval:0,maxretries:0,notificationIDList:{},ignoreTls:false,upsideDown:false,expiryNotification:false,maxredirects:3,accepted_statuscodes:['200'],dns_resolve_type:'A',dns_resolve_server:'1.1.1.1',httpBodyEncoding:'json',kafkaProducerBrokers:[],kafkaProducerSaslOptions:{mechanism:'None'},rabbitmqNodes:[],conditions:[]});
     fs.writeFileSync('/tmp/monitor.json',JSON.stringify(m));

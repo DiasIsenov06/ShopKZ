@@ -14,13 +14,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install playwright
+      - run: pip install playwright streamlit
       - run: python -m playwright install --with-deps chromium
       - name: Docker Kuma DOWN UP and restart proof
         env:
           SHOPKZ_SESSION_SECRET: ${{ github.run_id }}-isolated-demo-only-never-production
           KUMA_DEMO_PASSWORD: Lab11-Demo-Only-${{ github.run_id }}!
         run: python coursework/lab11/ops-proof.py
+      - name: Render actual executive dashboard
+        if: always()
+        run: python coursework/lab14/capture_dashboard.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
